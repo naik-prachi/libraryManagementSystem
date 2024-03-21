@@ -46,31 +46,35 @@ $user_data = check_login($con);     // to check whether the user is logged in
     <body>
         <div class="sidebar">
 
-            <div class="profile-pic" >
+            <div class="profile-pic">
                 <img src="images/dummypic.png" alt="dummy profile" height="150px" width="150px">
                 <br><br>
-                Hello, <?php echo $user_data['user_name']; ?>!
+                Hello,
+                <?php echo $user_data['user_name']; ?>!
             </div>
 
             <br><br><br>
-            <ul >
-                <a href="addBooks.php" >Add books</a>
-                <br><a href="removeBook.php" >Remove books</a>
-                <br><a href="#" >Search users</a>
+            <ul>
+                <a href="addBooks.php">Add books</a>
+                <br><a href="updateBooks.php">Update book details</a>
+                <br><a href="removeBook.php">Remove books</a>
+                <br><a href="searchBooks.php">Search users</a>
                 <br><a href="#">Search books</a>
                 <br><a href="#">Notifications</a>
                 <br><a href="#">Profile</a>
 
                 <br><br><br><br><br>
-            <a href="logout.php" >Log Out</a><br />
+                <a href="logout.php">Log Out</a><br />
             </ul>
 
         </div>
 
 
         <div class="content">
-            
-            <h1>Welcome <?php echo $user_data['user_type']; ?></h1>
+
+            <h1>Welcome
+                <?php echo $user_data['user_type']; ?>
+            </h1>
 
 
         </div>

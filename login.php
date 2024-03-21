@@ -8,13 +8,13 @@
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // something was posted
         // collect the data from post variable
-        $user_email = $_POST['user_email'];
+        $book_no = $_POST['user_email'];
         $password = $_POST['password'];
 
         // check if both are not empty
-        if (!empty ($user_email) && !empty ($password) && !is_numeric($user_email)) {
+        if (!empty ($book_no) && !empty ($password) && !is_numeric($book_no)) {
             // read from db
-            $query = "select * from userss where user_email = '$user_email' limit 1";
+            $query = "select * from userss where user_email = '$book_no' limit 1";
 
             // need the result
             $result = mysqli_query($con, $query);
@@ -111,7 +111,7 @@
 
                 
 
-                <a href="signup.php">Click to sign Up</a>
+                <!-- <a href="signup.php">Click to sign Up</a> -->
             </form>
         </div>
 

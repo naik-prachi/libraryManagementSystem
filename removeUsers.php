@@ -10,7 +10,7 @@
         // something was posted
         // collect the data from post variable
 
-        $book_no = $_POST['book_no'];
+        $book_no = $_POST['user_email'];
 
         // Check if the book number is set and not empty
         if (!empty($book_no)) {
@@ -18,24 +18,25 @@
             $book_no = mysqli_real_escape_string($con, $book_no);
 
             // Construct the DELETE query
-            $query = "DELETE FROM books WHERE book_no = '$book_no'";
+            $query = "DELETE FROM userss WHERE user_email = '$book_no'";
 
             // Execute the DELETE query
             if (mysqli_query($con, $query)) {
                 // Book successfully removed
                 // display alert box
-                echo '<script>alert("Book removed successfully!")</script>';
+                echo '<script>alert("User removed successfully!")</script>';
                 
                 // Redirect after a short delay
-                echo '<script>window.setTimeout(function(){ window.location.href = "staffHomepage.php"; }, 400);</script>';
+            echo '<script>window.setTimeout(function(){ window.location.href = "adminHomepage.php"; }, 400);</script>';
                 exit;
+            
             } else {
                 // Error in deleting the book
                 echo "Error: " . mysqli_error($con);
             }
         } else {
             // Book number is not provided or empty
-            echo "Please enter the book number.";
+            echo "Please enter the user email.";
         }
     }
 
@@ -47,7 +48,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Remove books</title>
+        <title>Remove users</title>
     </head>
 
     <body>
@@ -82,7 +83,7 @@
                     Remove book
                 </div>
 
-                <input id="text" type="number" name="book_no" placeholder="Enter book number..."><br><br>
+                <input id="text" type="email" name="user_email" placeholder="Enter user email..."><br><br>
 
                 <input id="button" type="submit" value="Remove"><br><br>
 

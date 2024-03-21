@@ -1,2 +1,263 @@
-crud on users
-crud on books
+admin
+    update users
+    view/search all users
+    view/search books
+
+staff
+    update books
+    view/search s/f users
+    
+
+s/f
+search for user by name, email or id
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+session_start();
+
+// Include necessary files (e.g., connection and functions)
+include ("connection.php");
+include ("functions.php");
+
+// initialise variable to track if email exists
+$email_exists = false;
+
+
+// check if the user has clicked on the post button
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    // something was posted, collect the data from post variable
+    $user_email = $_POST['user_email'];
+
+    // query the database to check if the email exists
+    $query = "SELECT * FROM userss WHERE user_email = '$user_email'";
+    $result = mysqli_query($con, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+        // email exists, flag it true
+        $email_exists = true;
+
+        // @todo : add alert message
+    }
+
+
+
+
+    if ($email_exists == true) {
+        // Retrieve existing user details from the database
+        $query = "SELECT * FROM userss WHERE user_email = '$user_email'";
+        $result = mysqli_query($con, $query);
+        $user = mysqli_fetch_assoc($result);
+
+        // Check if user details were found
+        if (!$user) {
+            // User not found in the database
+            // Handle the error accordingly (e.g., display an error message)
+            echo "User not found.";
+            exit; // Terminate script execution
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            // Update user details in the database
+            $query = "UPDATE userss SET user_name = '$new_user_name', user_email = '$new_user_email' WHERE user_email = '$user_email'";
+            $result = mysqli_query($con, $query);
+
+            if ($result) {
+                // User details updated successfully
+                // Redirect the user to a success page or display a success message
+                header("Location: adminHomepage.php");
+                exit; // Terminate script execution
+            } else {
+                // Error occurred while updating user details
+                // Display an error message or handle the error accordingly
+                echo "Error updating user details: " . mysqli_error($con);
+            }
+        }
+    }
+
+
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Update</title>
+</head>
+
+<body>
+    <div>
+        <!-- Form for entering user email -->
+        <form action="" method="post">
+            <input id="text" type="email" name="user_email" placeholder="Enter User Email"><br><br>
+            <input id="button" type="submit" value="Search">
+        </form>
+    </div>
+
+    <?php if ($email_exists): ?>
+        <!-- Display the second half of the form only if email exists -->
+        <div>
+            <!-- Update user details form -->
+            <form action="updateUser.php" method="post">
+                <!-- Add input fields for updating user details -->
+                <!-- For example: -->
+                <input id="text" type="text" name="new_user_name" placeholder="New Name"><br><br>
+                <input id="text" type="email" name="new_user_email" placeholder="New Email"><br><br>
+                <!-- Add more input fields as needed -->
+                <input id="button" type="submit" value="Update">
+            </form>
+        </div>
+    <?php endif; ?>
+</body>
+
+</html>
+
+
+
+<?php
+    session_start();
+
+    // Include necessary files (e.g., connection and functions)
+    include("connection.php");
+    include("functions.php");
+
+    // Check if the user is logged in
+    // if (!isset($_SESSION['user_id'])) {
+    //     // Redirect the user to the login page if not logged in
+    //     header("Location: login.php");
+    //     exit; // Terminate script execution
+    // }
+
+    // initialise variable to track if email exists
+    $email_exists = false;
+    
+
+    // check if the user has clicked on the post button
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        // something was posted, collect the data from post variable
+        $user_email = $_POST['user_email'];
+
+        // query the database to check if the email exists
+        $query = "SELECT * FROM userss WHERE user_email = '$user_email'";
+        $result = mysqli_query($conn, $query);
+
+        if(mysqli_num_rows($result) > 0) {
+            // email exists, flag it true
+            $email_exists = true;
+        }
+
+
+
+
+        // Retrieve form data
+        // $user_id = $_SESSION['user_id']; // Assuming user ID is stored in the session
+        // $user_name = $_POST['user_name'];
+        // $user_email = $_POST['user_email'];
+        // // Add more fields as needed
+
+        // // Perform validation on the input data
+        // // For example, ensure that required fields are not empty, validate email format, etc.
+
+        // // Update user details in the database
+        // $query = "UPDATE userss SET user_name = '$user_name', user_email = '$user_email' WHERE user_id = '$user_id'";
+        // $result = mysqli_query($con, $query);
+
+        // if ($result) {
+        //     // User details updated successfully
+        //     // Redirect the user to a success page or display a success message
+        //     header("Location: profile.php");
+        //     exit; // Terminate script execution
+        // } else {
+        //     // Error occurred while updating user details
+        //     // Display an error message or handle the error accordingly
+        //     echo "Error updating user details: " . mysqli_error($con);
+        // }
+    }
+
+    // Retrieve existing user details from the database
+    $user_id = $_SESSION['user_id']; // Assuming user ID is stored in the session
+    $query = "SELECT * FROM users WHERE user_id = '$user_id'";
+    $result = mysqli_query($con, $query);
+    $user = mysqli_fetch_assoc($result);
+
+    // Check if user details were found
+    if (!$user) {
+        // User not found in the database
+        // Handle the error accordingly (e.g., display an error message)
+        echo "User not found.";
+        exit; // Terminate script execution
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Update</title>
+</head>
+<body>
+<div>
+        <!-- Form for entering user email -->
+        <form action="" method="post">
+            <input id="text" type="email" name="user_email" placeholder="Enter User Email"><br><br>
+            <input id="button" type="submit" value="Search">
+        </form>
+    </div>
+
+    <?php if($email_exists): ?>
+    <!-- Display the second half of the form only if email exists -->
+    <div>
+        <!-- Update user details form -->
+        <form action="updateUser.php" method="post">
+            <!-- Add input fields for updating user details -->
+            <!-- For example: -->
+            <input id="text" type="text" name="user_name" placeholder="New Name"><br><br>
+            <input id="text" type="email" name="user_email" placeholder="New Password"><br><br>
+            <!-- Add more input fields as needed -->
+            <input id="button" type="submit" value="Update">
+        </form>
+    </div>
+    <?php endif; ?>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User Details</title>
+</head>
+<body>
+    <h1>Update User Details</h1>
+    <form action="" method="post">
+        <label for="user_name">Name:</label>
+        <input type="text" id="user_name" name="user_name" value="<?php echo $user['user_name']; ?>"><br><br>
+
+        <label for="user_email">Email:</label>
+        <input type="email" id="user_email" name="user_email" value="<?php echo $user['user_email']; ?>"><br><br>
+
+        <!-- Add more fields as needed -->
+
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>

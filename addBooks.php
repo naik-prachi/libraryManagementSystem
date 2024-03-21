@@ -25,9 +25,12 @@
 
             mysqli_query($con, $query);
 
-            // redirect the user to the login page
-            echo ('Successful');
-            
+            // display alert box
+            echo '<script>alert("Book added successfully!")</script>'; 
+
+            // Redirect after a short delay
+            echo '<script>window.setTimeout(function(){ window.location.href = "staffHomepage.php"; }, 400);</script>';
+            exit;
         }
         else{
             echo "Please enter valid information";
