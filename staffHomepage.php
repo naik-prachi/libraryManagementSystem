@@ -55,11 +55,13 @@ $user_data = check_login($con);     // to check whether the user is logged in
 
             <br><br><br>
             <ul>
-                <a href="addBooks.php">Add books</a>
+                <a href="issueBooks.php">Issue book</a>
+                <br><a href="returnBooks.php">Return books</a>
+                <br><a href="addBooks.php">Add books</a>
                 <br><a href="updateBooks.php">Update book details</a>
                 <br><a href="removeBook.php">Remove books</a>
-                <br><a href="searchBooks.php">Search users</a>
-                <br><a href="#">Search books</a>
+                <br><a href="staffViewUsers.php">Search users</a>
+                <br><a href="searchBooks.php">Search books</a>
                 <br><a href="#">Notifications</a>
                 <br><a href="#">Profile</a>
 

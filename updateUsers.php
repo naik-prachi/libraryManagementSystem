@@ -85,15 +85,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <div>
         <!-- Update user details form -->
         <form action="" method="post">
-            <!-- Add input fields for updating user details -->
-            <!-- For example: -->
-            <input id="text" type="text" name="new_user_name" placeholder="New Name"><br><br>
-            <input id="text" type="email" name="new_user_email" placeholder="New Email"><br><br>
-            <!-- Add hidden input field to store user_email -->
-            <input type="hidden" name="user_email" value="<?php echo $book_no; ?>">
-            <!-- Add more input fields as needed -->
-            <input id="button" type="submit" value="Update">
-        </form>
+    <!-- Add input fields for updating user details -->
+    <!-- Populate the value attribute with existing values -->
+    <input id="text" type="text" name="new_user_name" placeholder="New Name" value="<?php echo $book['user_name']; ?>"><br><br>
+    <input id="text" type="email" name="new_user_email" placeholder="New Email" value="<?php echo $book['user_email']; ?>"><br><br>
+    <!-- Add hidden input field to store user_email -->
+    <input type="hidden" name="user_email" value="<?php echo $book_no; ?>">
+    <!-- Add more input fields as needed -->
+    <input id="button" type="submit" value="Update">
+</form>
     </div>
     <?php endif; ?>
 </body>

@@ -1,70 +1,87 @@
 <?php
-session_start();
+    session_start();
 
-include("connection.php");  //connecting to the database
-include("functions.php");   //calling the functions
+    include("connection.php");  //connecting to the database
+    include("functions.php");   //calling the functions
 
-// Function to send email
-// function sendEmail($to, $subject, $message) {
-//     // Set additional headers
-//     $headers = "From: woozinotwhoshe@gmail.com" . "\r\n" .
-//                "Reply-To: $to" . "\r\n" .
-//                "X-Mailer: PHP/" . phpversion();
+    // Function to send email
+    function sendEmail($to, $subject, $message) {
+        $admin_email = "library@college.in";
+        $headers = "From: $admin_email\r\n";
+        $headers .= "Reply-To: $admin_email\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-//     // Set SMTP server and port dynamically
-//     ini_set("SMTP", "smtp.gmail.com");
-//     ini_set("smtp_port", "587");
-//     // Send email
-//     // mail($to, $subject, $message, $headers);
-//     if (mail($to, $subject, $message, $headers)) {
-//         echo "Email sent successfully to $to";
-//     } else {
-//         echo "Failed to send email to $to";
-//     }
-// }
-
-// check if the user has clicked on the post button
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    // something was posted
-    // collect the data from post variable
-    $user_type = $_POST['user_type'];
-    $user_name = $_POST['user_name'];
-    $book_no = $_POST['user_email'];
-    $password = $_POST['password'];
-    $conPwd = $_POST['conPwd'];
-
-    // check if both are not empty
-    if (!empty($user_name) && !empty($user_type) && !empty($book_no) && !empty($password) && !is_numeric($user_name)) {
-        if ($password != $conPwd)
-            echo "Passwords do not match";
-        else {
-            // save to db
-            $user_id = random_num(20);
-            $query = "insert into userss (user_id, user_type, user_name, user_email, password) values ('$user_id', '$user_type', '$user_name', '$book_no', '$password')";
-
-            mysqli_query($con, $query);
-
-            // Display the alert box  
-            echo '<script>alert("Registration is successful!")</script>'; 
-  
-
-            // Send email to the registered email address
-            // $subject = "Library Registration";
-            // $message = "Dear $user_name,\n\nyou've been registered to our library. Please login to enjoy all the functionalities.";
-            // sendEmail($user_email, $subject, $message);
-
-            // redirect the user to the login page
-            // header("Location: login.php");
-            
-            // Redirect after a short delay
-            echo '<script>window.setTimeout(function(){ window.location.href = "adminHomepage.php"; }, 400);</script>';
-            die;
-        }
-    } else {
-        echo "Please enter valid information";
+        return mail($to, $subject, $message, $headers);
     }
-}
+
+    // check if the user has clicked on the post button
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        // something was posted
+        // collect the data from post variable
+        $user_type = $_POST['user_type'];
+        $user_name = $_POST['user_name'];
+        $user_email = $_POST['user_email'];
+        $password = $_POST['password'];
+        $conPwd = $_POST['conPwd'];
+
+        // check if all fields are not empty
+        if (!empty($user_name) && !empty($user_type) && !empty($user_email) && !empty($password) && !empty($conPwd)) {
+            // check if passwords match
+            if ($password != $conPwd) {
+                echo "Passwords do not match";
+            } else {
+                // save to database
+                $user_id = random_num(20);
+                $query = "INSERT INTO userss (user_id, user_type, user_name, user_email, password) VALUES ('$user_id', '$user_type', '$user_name', '$user_email', '$password')";
+                $result = mysqli_query($con, $query);
+
+                if ($result) {
+                    // Send email to the registered user
+                    $to = $user_email;
+                    $subject = "Library Registration Confirmation";
+                    $message = "Dear $user_name,<br><br>Your registration with our library system was successful. Your password is: 260515. <br><br>Best regards,<br>Library Administration";
+                    $headers = "From: woozinotwhoshe@gmail.com";
+                    // $email_sent = sendEmail($user_email, $subject, $message);
+
+                    // Set SMTP server and port for Gmail
+                    ini_set("SMTP", "smtp.gmail.com");
+                    ini_set("smtp_port", "587");
+
+                    // Enable TLS
+                    ini_set("sendmail_from", "woozinotwhoshe@gmail.com"); // Replace with your Gmail address
+                    ini_set("sendmail_path", "C:\\xampp\\sendmail\\sendmail.exe -t -i"); // Path to sendmail executable
+
+                    // Additional headers for sending emails via Gmail
+                    $headers = "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $headers .= "X-Mailer: PHP/" . phpversion();
+
+                    // Set email sender and recipient
+                    $from = "woozinotwhoshe@gmail.com"; // Replace with your Gmail address
+                    $to = $user_email; // Replace with recipient's email address
+
+
+                    // if ($email_sent) {
+                    if(mail($to, $subject, $message, $headers)){
+                        // Display success message and redirect
+                        echo '<script>alert("Registration is successful! Email sent to registered user.")</script>';
+                        echo '<script>window.setTimeout(function(){ window.location.href = "adminHomepage.php"; }, 400);</script>';
+                        die;
+                    } else {
+                        // Display error message if email could not be sent
+                        echo '<script>alert("Registration is successful! Email could not be sent.")</script>';
+                    }
+                } else {
+                    echo "Error: " . mysqli_error($con);
+                }
+            }
+        } else {
+            echo "Please enter valid information";
+        }
+    }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

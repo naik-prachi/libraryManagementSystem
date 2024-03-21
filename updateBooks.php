@@ -92,13 +92,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <form action="" method="post">
             <!-- Add input fields for updating user details -->
 
-            <input id="text" type="number" name="new_book_no" placeholder="New Bno"><br><br>
-            <input id="text" type="text" name="new_book_title" placeholder="New Book title"><br><br>
-            <input id="text" type="text" name="new_book_author" placeholder="New Author"><br><br>
-            <input id="text" type="text" name="new_book_subject" placeholder="New Book subject"><br><br>
-            <input id="text" type="text" name="new_total_copies" placeholder="New Total copies"><br><br>
-            <input id="text" type="text" name="new_borrowed_copies" placeholder="New Borrowed copies"><br><br>
-            <input id="text" type="text" name="new_available_copies" placeholder="New Currently available copied"><br><br>
+            <input id="text" type="text" name="new_book_no" value="<?php echo $book['book_no']; ?>"><br><br>
+            <input id="text" type="text" name="new_book_title" value="<?php echo $book['book_title']; ?>"><br><br>
+            <input id="text" type="text" name="new_book_author" value="<?php echo $book['book_author']; ?>" ><br><br>
+            <input id="text" type="text" name="new_book_subject" value="<?php echo $book['book_subject']; ?>" ><br><br>
+            <input id="text" type="text" name="new_total_copies" value="<?php echo $book['total_copies']; ?> "><br><br>
+            <input id="text" type="text" name="new_borrowed_copies" value="<?php echo $book['borrowed_copies']; ?>"><br><br>
+            <input id="text" type="text" name="new_available_copies" value="<?php echo $book['available_copies']; ?>"><br><br>
 
             <!-- Add hidden input field to store user_email -->
             <input type="hidden" name="book_no" value="<?php echo $book_no; ?>">
