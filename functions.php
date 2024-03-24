@@ -4,7 +4,7 @@
         // check if session value is set
         if(isset($_SESSION['user_id'])){
             $id = $_SESSION['user_id'];
-            $query = "select * from userss where user_id = '$id' limit 1";
+            $query = "select * from users where user_id = '$id' limit 1";
 
             // read from the database and get a result
             $result = mysqli_query($con, $query);
@@ -18,7 +18,7 @@
 
         // redirect to login
         header("Location: login.php");
-        die;                                    // makes sure that the code doesn't continue
+        exit;                                    // makes sure that the code doesn't continue
     }
 
     function random_num($length){

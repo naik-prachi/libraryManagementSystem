@@ -3,12 +3,12 @@
 session_start();        //  Starting Session
     $_SESSION;          // is a global variable that can be accessed by any page  in the site. It allows you to store information
 
-    include("connection.php");  //connecting to the database
-    include("functions.php");   //calling the functions
+    include("../connection.php");  //connecting to the database
+    include("../functions.php");   //calling the functions
 
     // Include sidebar, navbar, and content files
-    include ("sidebar.php");
-    include ("navbar.php");
+    // include ("sidebar.php");
+    // include ("navbar.php");
     
     $user_data = check_login($con);     // to check whether the user is logged in
 ?>
@@ -46,19 +46,19 @@ session_start();        //  Starting Session
 <div class="sidebar">
 
 <div class="profile-pic" >
-    <img src="images/dummypic.png" alt="dummy profile" height="150px" width="150px">
+    <img src="../images/dummypic.png" alt="dummy profile" height="150px" width="150px">
     <br><br>
-    Hello, <?php echo $user_data['user_name']; ?>!
+    Hello, <?php echo $user_data['user_fname'], $user_data['user_lname']; ?>!
 </div>
 
 <br><br><br>
 <ul >
-    <br><a href="searchBooks.php">Search books</a>
+    <br><a href="../searchBooks.php">Search books</a>
     <br><a href="#">Notifications</a>
-    <br><a href="#">Profile</a>
+    <br><a href="sfProfilepage.php">Profile</a>
 
     <br><br><br><br><br>
-<a href="logout.php" >Log Out</a><br />
+<a href="../logout.php" >Log Out</a><br />
 </ul>
 
 </div>

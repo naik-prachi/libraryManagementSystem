@@ -5,7 +5,7 @@
     $dbhost = "localhost";
     $dbuser = "root";
     $dbpass = "";
-    $dbname = "delt";
+    $dbname = "library_managment_system";
 
     // to connect to a database
     // if condition to catch any erros thrown during db connection

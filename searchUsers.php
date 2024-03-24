@@ -4,7 +4,7 @@
     include("connection.php");  //connecting to the database
     include("functions.php");   //calling the functions
 
-    $query = "select * from userss where user_type = '$user_type'";
+    $query = "select * from users where user_type = '$user_type'";
     $result = mysqli_query($con, $query);
 
     // Check if query executed successfully
@@ -16,8 +16,11 @@
             echo "<tr>";
             echo "<td>" . $row['user_id'] . "</td>";
             echo "<td>" . $row['user_type'] . "</td>";
-            echo "<td>" . $row['user_name'] . "</td>";
+            echo "<td>" . $row['college_id'] . "</td>";
+            echo "<td>" . $row['user_fname'] . "</td>";
+            echo "<td>" . $row['user_lname'] . "</td>";
             echo "<td>" . $row['user_email'] . "</td>";
+            echo "<td>" . $row['user_phone'] . "</td>";
             echo "</tr>";
         }
         echo "</table>";

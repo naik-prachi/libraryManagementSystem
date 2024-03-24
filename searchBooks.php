@@ -17,7 +17,7 @@
         while($row = mysqli_fetch_assoc($result)) {
             // Display the details of each book within table rows
             echo "<tr>";
-            echo "<td>" . $row["book_no"] . "</td>";
+            echo "<td>" . $row["ISBN"] . "</td>";
             echo "<td>" . $row["book_title"] . "</td>";
             echo "<td>" . $row["book_author"] . "</td>";
             echo "</tr>";

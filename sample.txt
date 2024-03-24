@@ -1,4 +1,14 @@
 @todo:
+
+    resolve:
+        - delete books
+
+    create:
+        - return book
+        - fine calculation
+        
+        - trigger -> inc borrowed copies + dec available_copies
+
     display users
     search books/ users
     precedure to find students who are due to return today + overdue
@@ -7,7 +17,122 @@
     create transaction table -> return date should be 7 days from the day it was issued.
 
 
-codes...
+
+
+//updateBooks.php
+        <?php
+            session_start();
+
+            // Include necessary files (e.g., connection and functions)
+            include("../connection.php");
+            include("../functions.php");
+
+            // Initialise variable to track if email exists
+            $ISBN_exists = false;
+
+            // Check if the user has clicked on the post button
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                // Something was posted, collect the data from post variable
+                if(isset($_POST['ISBN'])) {
+                    $ISBN = $_POST['ISBN'];
+
+                    // Query the database to check if the email exists
+                    $query = "SELECT * FROM books WHERE book_no = '$ISBN'";
+                    $result = mysqli_query($con, $query);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        // Email exists, flag it true
+                        $ISBN_exists = true;
+
+                        // Retrieve existing user details from the database
+                        $book = mysqli_fetch_assoc($result);
+
+                        // Check if user details were found
+                        if (!$book) {
+                            // User not found in the database
+                            // Handle the error accordingly (e.g., display an error message)
+                            echo "Book not found.";
+                            exit; // Terminate script execution
+                        }
+                    }
+                }
+
+                // Handle the second POST request for updating user details
+                if ($ISBN_exists && isset($_POST['new_book_no']) && isset($_POST['new_book_title']) && isset($_POST['new_book_author']) && isset($_POST['new_book_subject']) && isset($_POST['new_total_copies']) && isset($_POST['new_available_copies'])) {
+                    $new_ISBN = $_POST['new_ISBN'];
+                    $new_book_title = $_POST['new_book_title'];
+                    $new_book_author = $_POST['new_book_author'];
+                    $new_book_subject = $_POST['new_book_subject'];
+                    $new_total_copies = $_POST['new_total_copies'];
+                    $new_borrowed_copies = $_POST['new_borrowed_copies'];
+                    $new_available_copies = $_POST['new_available_copies'];
+
+                    // Update user details in the database
+                    $query = "UPDATE books SET ISBN = '$new_ISBN', book_title = '$new_book_title', book_author = '$new_book_author', book_subject = '$new_book_subject', total_copies = '$new_total_copies', borrowed_copies = '$new_borrowed_copies', available_copies = '$new_available_copies' WHERE book_no = '$ISBN'";
+                    $result = mysqli_query($con, $query);
+
+                    if ($result) {
+                        // User details updated successfully
+                    
+                        // Display the alert box  
+                        echo '<script>alert("Book update is successful!")</script>';
+                        
+                        // Redirect after a short delay
+                        echo '<script>window.setTimeout(function(){ window.location.href = "staffHomepage.php"; }, 400);</script>';
+                        exit; // Terminate script execution
+                    } else {
+                        // Error occurred while updating user details
+                        // Display an error message or handle the error accordingly
+                        echo "Error updating user details: " . mysqli_error($con);
+                    }
+                }
+            }
+            ?>
+
+            <!DOCTYPE html>
+            <html lang="en">
+
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Admin Update</title>
+            </head>
+
+            <body>
+                <div>
+                    <!-- Form for entering user email -->
+                    <form action="" method="post">
+                        <input id="text" type="text" name="ISBN" placeholder="Enter ISBN."><br><br>
+                        <input id="button" type="submit" value="Search">
+                    </form>
+                </div>
+
+                <?php if ($ISBN_exists): ?>
+                <!-- Display the second half of the form only if email exists -->
+                <div>
+                    <!-- Update user details form -->
+                    <form action="" method="post">
+                        <!-- Add input fields for updating user details -->
+
+                        <input id="text" type="text" name="new_ISBN" value="<?php echo $book['ISBN']; ?>"><br><br>
+                        <input id="text" type="text" name="new_book_title" value="<?php echo $book['book_title']; ?>"><br><br>
+                        <input id="text" type="text" name="new_book_author" value="<?php echo $book['book_author']; ?>" ><br><br>
+                        <input id="text" type="text" name="new_book_subject" value="<?php echo $book['book_subject']; ?>" ><br><br>
+                        <input id="text" type="text" name="new_total_copies" value="<?php echo $book['total_copies']; ?> "><br><br>
+                        <input id="text" type="text" name="new_borrowed_copies" value="<?php echo $book['borrowed_copies']; ?>"><br><br>
+                        <input id="text" type="text" name="new_available_copies" value="<?php echo $book['available_copies']; ?>"><br><br>
+
+                        <!-- Add hidden input field to store user_email -->
+                        <input type="hidden" name="ISBN" value="<?php echo $ISBN; ?>">
+
+                        <!-- Add more input fields as needed -->
+                        <input id="button" type="submit" value="Update">
+                    </form>
+                </div>
+                <?php endif; ?>
+            </body>
+
+            </html>
 
 
 
@@ -17,7 +142,8 @@ codes...
 
 
 
-    <?php
+
+ <?php
         session_start();
 
         // Include necessary files (e.g., connection and functions)
@@ -84,7 +210,106 @@ codes...
 
     ?>
 
+//removeUsers.php
+    <?php
+
+        session_start();
+
+        include("../connection.php");  //connecting to the database
+        include("../functions.php");   //calling the functions
+
+        // check if the user has clicked on the post button
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            // something was posted
+            // collect the data from post variable
+
+            $ISBN = $_POST['user_email'];
+
+            // Check if the book number is set and not empty
+            if (!empty($ISBN)) {
+                // Sanitize the book number to prevent SQL injection
+                $ISBN = mysqli_real_escape_string($con, $ISBN);
+
+                // Construct the DELETE query
+                $query = "DELETE FROM users WHERE user_email = '$ISBN'";
+
+                // Execute the DELETE query
+                if (mysqli_query($con, $query)) {
+                    // Book successfully removed
+                    // display alert box
+                    echo '<script>alert("User removed successfully!")</script>';
+                    
+                    // Redirect after a short delay
+                echo '<script>window.setTimeout(function(){ window.location.href = "adminHomepage.php"; }, 400);</script>';
+                    exit;
+                
+                } else {
+                    // Error in deleting the book
+                    echo "Error: " . mysqli_error($con);
+                }
+            } else {
+                // Book number is not provided or empty
+                echo "Please enter the user email.";
+            }
+        }
+
+    ?>
+
     <!DOCTYPE html>
+    <html lang="en">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Remove users</title>
+        </head>
+
+        <body>
+            <style type="text/css">
+                #text {
+                    height: 25px;
+                    border-radius: 5px;
+                    padding: 4px;
+                    border: solid thin #aaa;
+                    width: 100%;
+                }
+
+                #button {
+                    padding: 10px;
+                    width: 100px;
+                    color: white;
+                    background-color: cadetblue;
+                    border: none;
+                }
+
+                #box {
+                    background-color: gray;
+                    margin: auto;
+                    width: 300px;
+                    padding: 20px;
+                }
+            </style>
+
+            <div id="box">
+                <form action="" method="post">
+                    <div style="font-size: 20px; margin: 10px;color:white">
+                        Remove book
+                    </div>
+
+                    <input id="text" type="email" name="user_email" placeholder="Enter user email..."><br><br>
+
+                    <input id="button" type="submit" value="Remove"><br><br>
+
+                    
+                </form>
+            </div>
+
+
+        </body>
+
+    </html>
+
+<!DOCTYPE html>
     <html lang="en">
 
         <head>
@@ -197,7 +422,7 @@ codes...
         }
     ?>
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
         <head>
             <meta charset="UTF-8">

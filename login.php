@@ -8,13 +8,13 @@
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // something was posted
         // collect the data from post variable
-        $book_no = $_POST['user_email'];
+        $ISBN = $_POST['user_email'];
         $password = $_POST['password'];
 
         // check if both are not empty
-        if (!empty ($book_no) && !empty ($password) && !is_numeric($book_no)) {
+        if (!empty ($ISBN) && !empty ($password) && !is_numeric($ISBN)) {
             // read from db
-            $query = "select * from userss where user_email = '$book_no' limit 1";
+            $query = "select * from users where user_email = '$ISBN' limit 1";
 
             // need the result
             $result = mysqli_query($con, $query);
@@ -29,19 +29,19 @@
 
                         // redirect to admin homepage
                         if($user_data['user_type'] === 'Admin'){
-                            header("Location: adminHomepage.php");
+                            header("Location: admin/adminHomepage.php");
                             exit;
                         }
 
                         // redirect to staff homepage
                         if($user_data['user_type'] === 'Staff'){
-                            header("Location: staffHomepage.php");
+                            header("Location: staff/staffHomepage.php");
                             exit;
                         }
 
                         // redirect to s/f homepage
                         if($user_data['user_type'] === 'Student' || $user_data['user_type'] === 'Faculty'){
-                            header("Location: sfHomepage.php");
+                            header("Location: studentFaculty/sfHomepage.php");
                             exit;
                         }
 

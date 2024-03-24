@@ -1,7 +1,7 @@
 <?php
 // Include necessary files (e.g., connection and functions)
-include("connection.php");
-include("functions.php");
+include("../connection.php");
+include("../functions.php");
 
 // Query the view_student_faculty to retrieve user details
 $query = "SELECT * FROM view_student_faculty";
@@ -16,8 +16,11 @@ if ($result) {
         echo "<tr>";
         echo "<td>" . $row['user_id'] . "</td>";
         echo "<td>" . $row['user_type'] . "</td>";
-        echo "<td>" . $row['user_name'] . "</td>";
+        echo "<td>" . $row['college_id'] . "</td>";
+        echo "<td>" . $row['user_fname'] . "</td>";
+        echo "<td>" . $row['user_lname'] . "</td>";
         echo "<td>" . $row['user_email'] . "</td>";
+        echo "<td>" . $row['user_phone'] . "</td>";
         echo "</tr>";
     }
     echo "</table>";
