@@ -1,12 +1,11 @@
 @todo:
 
     resolve:
-        - delete books
 
     create:
         - return book
         - fine calculation
-        
+        - staff view users
         - trigger -> inc borrowed copies + dec available_copies
 
     display users
@@ -209,6 +208,27 @@
         }
 
     ?>
+
+//updateUsers.php
+    <div>
+            <!-- Update user details form -->
+            <form action="" method="post">
+                <!-- Add input fields for updating user details -->
+                <!-- Populate the value attribute with existing values -->
+                <input id="text" type="text" name="new_college_id" placeholder="New College ID"
+                    value="<?php echo $user['college_id']; ?>"><br><br>
+                <input id="text" type="text" name="new_user_fname" placeholder="New First name"
+                    value="<?php echo $user['user_fname']; ?>"><br><br>
+                <input id="text" type="text" name="new_user_lname" placeholder="New last Name"
+                    value="<?php echo $user['user_lname']; ?>"><br><br>
+                <input id="text" type="email" name="new_user_email" placeholder="New Email"
+                    value="<?php echo $user['user_email']; ?>"><br><br>
+                <input id="text" type="text" name="new_user_phone" placeholder="New Phone no"
+                    value="<?php echo $user['user_phone']; ?>"><br><br>
+                <!-- Add hidden input field to store user_email -->
+                <input type="hidden" name="user_email" value="<?php echo $user_email; ?>">
+                <!-- Add more input fields as needed -->
+                <input id="button" type="submit" value="Update">
 
 //removeUsers.php
     <?php

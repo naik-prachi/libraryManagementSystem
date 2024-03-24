@@ -5,7 +5,7 @@
     
 	$user_data = check_login($con);
 
-	$query = "select * from books where ISBN = $_GET[bn]";
+	$query = "SELECT * FROM books WHERE ISBN = $_GET[bn]";
 	$query_run = mysqli_query($con,$query);
 	while ($row = mysqli_fetch_assoc($query_run)){
 		$ISBN = $row['ISBN'];

@@ -54,7 +54,7 @@ session_start();        //  Starting Session
             <br><br><br>
             <ul >
                 <a href="addUsers.php" >Add users</a>
-                <br><a href="updateUsers.php">Update user details</a>
+                <br><a href="manageUsers.php">Manage users</a>
                 <br><a href="removeUsers.php" >Remove users</a>
                 <br><a href="searchUsers.php" >Search users</a>
                 <br><a href="searchBooks.php">Search books</a>

@@ -2,8 +2,8 @@
 
     session_start();
 
-    include("../connection.php");  //connecting to the database
-    include("../functions.php");   //calling the functions
+    include ("../connection.php");  //connecting to the database
+    include ("../functions.php");   //calling the functions
 
     $user_data = check_login($con);
 
@@ -13,12 +13,14 @@
         // Book successfully removed
         // display alert box
         echo '<script>alert("User removed successfully!")</script>';
-                
+
         // Redirect after a short delay
         echo '<script>window.setTimeout(function(){ window.location.href = "manageUsers.php"; }, 400);</script>';
         exit;
-        } else {
-            // Error in deleting the book
-            echo "Error: " . mysqli_error($con);
-        }
+    } 
+    else {
+        // Error in deleting the book
+        echo "Error: " . mysqli_error($con);
+    }
+
 
