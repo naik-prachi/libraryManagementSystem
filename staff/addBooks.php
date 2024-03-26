@@ -21,7 +21,7 @@
             
             // save to db
             $book_id = random_num(20);
-            $query = "insert into books (book_id, ISBN, book_title, book_author, book_subject, total_copies, available_copies) values ('$book_id', '$ISBN', '$book_title', '$book_author', '$book_subject', '$total_copies', '$available_copies')";
+            $query = "insert into books (book_id, ISBN, book_title, book_author, book_subject, total_copies, borrowed_copies, available_copies) values ('$book_id', '$ISBN', '$book_title', '$book_author', '$book_subject', '$total_copies', 0, '$available_copies')";
 
             mysqli_query($con, $query);
 

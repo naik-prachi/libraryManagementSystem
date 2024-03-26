@@ -115,7 +115,7 @@
 					<select class="form-control" name="college_id">
 						<option>-Select College ID-</option>
 						<?php
-						$query = "SELECT college_id FROM users WHERE user_type = 'Student' OR user_type = 'Faculty'";
+						$query = "SELECT DISTINCT college_id FROM users WHERE user_type = 'Student' OR user_type = 'Faculty'";
 						$query_run = mysqli_query($con, $query);
 						while ($row = mysqli_fetch_assoc($query_run)) {
 							?>
@@ -134,7 +134,7 @@
 					<select class="form-control" name="ISBN">
 						<option>-Select ISBN-</option>
 						<?php
-						$query = "SELECT ISBN FROM issuedbook";
+						$query = "SELECT DISTINCT ISBN FROM issuedbook";
 						$query_run = mysqli_query($con, $query);
 						while ($row = mysqli_fetch_assoc($query_run)) {
 							?>

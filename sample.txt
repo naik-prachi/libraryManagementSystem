@@ -22,11 +22,14 @@
 
 
 // stored precedure...
+    DROP PROCEDURE IF EXISTS IssueBook;
+
+
     DELIMITER //
 
     CREATE PROCEDURE IssueBook(IN issuedid BIGINT, IN ISBNO VARCHAR(16), IN collegeid VARCHAR(15), IN issuedate DATE, IN duedate DATE)
     BEGIN
-        DECLARE available_copies INT;
+        DECLARE available_books INT;
         DECLARE user_due_books INT;
         
         -- Check if the user has any due books
@@ -39,23 +42,37 @@
         END IF;
         
         -- Check if the book is available
-        SELECT available_copies INTO available_copies 
+        SELECT available_copies INTO available_books 
         FROM books 
         WHERE ISBN = ISBNO;
         
-        IF available_copies <= 0 THEN
+        IF available_books <= 0 THEN
             SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No available copies of this book.';
         END IF;
         
         -- Issue the book
         INSERT INTO issuedbook (issued_id, ISBN, college_id, issue_date, due_date) 
         VALUES (issuedid, ISBNO, collegeid, issuedate, duedate);
+
+        -- Update available copies
+        UPDATE books 
+        SET borrowed_copies = borrowed_copies + 1,
+        available_copies = available_copies - 1
+        WHERE ISBN = ISBNO;
         
         COMMIT;
     END;
     //
 
     DELIMITER ;
+
+// trigger ...
+    BEGIN
+    UPDATE books
+    SET borrowed_copies = borrowed_copies + 1,
+        available_copies = available_copies - 1
+    WHERE ISBN = NEW.ISBN;
+    END
 
 //updateBooks.php
         <?php

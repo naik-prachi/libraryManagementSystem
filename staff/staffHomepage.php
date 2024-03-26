@@ -23,6 +23,20 @@ function get_borrowed_book_count()
     return ($borrowed_book_count);
 }
 
+function get_past_due_count()
+{
+    include ("../connection.php");
+    $past_due_count = 0;
+    $query = "SELECT count(*) AS past_due_count 
+            FROM issuedbook
+            WHERE due_date < CURDATE() AND returned_date IS NULL";
+    $query_run = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_assoc($query_run)) {
+        $past_due_count = $row['past_due_count'];
+    }
+    return ($past_due_count);
+}
+
 function get_due_book_count()
 {
     include ("../connection.php");
@@ -46,6 +60,19 @@ function view_issued_book()
           JOIN books b ON i.ISBN = b.ISBN 
           JOIN users u ON i.college_id = u.college_id
           WHERE i.due_date > CURDATE() AND i.returned_date IS NULL";
+
+    return ($query);
+}
+
+function view_students_due_today()
+{
+    include ("../connection.php");
+
+    // join table books and issuedbook
+    $query = "SELECT * FROM issuedbook i 
+          JOIN books b ON i.ISBN = b.ISBN 
+          JOIN users u ON i.college_id = u.college_id
+          WHERE i.due_date = CURDATE() AND i.returned_date IS NULL";
 
     return ($query);
 }
@@ -204,6 +231,19 @@ function view_students_past_due()
                     </div>
                 </div>
             </div>
+
+            <div class="col-sm-*" style="margin: 25px">
+                <div class="card bg-light" style="width: 300px">
+                    <div class="card-header">Book Over Due</div>
+                    <div class="card-body">
+                        <p class="card-text">No. of books past due:
+                            <?php echo get_past_due_count(); ?>
+                        </p>
+                        <!-- <a class="btn btn-success" href="view_issued_book.php">View Issued Books</a> -->
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <br><br><br><br>
@@ -257,16 +297,80 @@ function view_students_past_due()
                         ?>
                     </table>
 
-                    
+
                 </form>
             </div>
             <div class="col-md-2"></div>
         </div>
 
-<br><br><br>
-<!-- draw a horizontal line between the two tables -->
-<hr width=100% align="left"> 
-<br><br><br>
+
+        <br><br><br>
+        <!-- draw a horizontal line between the two tables -->
+        <hr width=100% align="left">
+        <br><br><br>
+
+
+        <center>
+            <h4>Due Today</h4><br>
+        </center>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-sm-*">
+                <form>
+                    <table class="table-bordered" width="900px" style="text-align: center">
+                        <tr>
+                            <th>ISBN</th>
+                            <th>TITLE</th>
+                            <th>COLLEGE ID</th>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>ISSUE DATE</th>
+                        </tr>
+
+                        <?php
+
+                        $query_run = mysqli_query($con, view_students_due_today());
+                        while ($row = mysqli_fetch_assoc($query_run)) {
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $row['ISBN']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['book_title']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['college_id']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['user_fname'], " ", $row['user_lname']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['user_email']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['issue_date']; ?>
+                                </td>
+
+                            </tr>
+
+                            <?php
+                        }
+                        ?>
+                    </table>
+
+
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+
+
+        <br><br><br>
+        <!-- draw a horizontal line between the two tables -->
+        <hr width=100% align="left">
+        <br><br><br>
 
 
         <center>
@@ -303,7 +407,7 @@ function view_students_past_due()
                                     <?php echo $row['college_id']; ?>
                                 </td>
                                 <td>
-                                <?php echo $row['user_fname'], " ", $row['user_lname']; ?>
+                                    <?php echo $row['user_fname'], " ", $row['user_lname']; ?>
                                 </td>
                                 <td>
                                     <?php echo $row['user_email']; ?>
@@ -322,7 +426,7 @@ function view_students_past_due()
                         ?>
                     </table>
 
-                    
+
                 </form>
             </div>
             <div class="col-md-2"></div>
