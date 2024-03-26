@@ -1,34 +1,204 @@
 <?php
-// Include necessary files (e.g., connection and functions)
-include("../connection.php");
-include("../functions.php");
+session_start();        //  Starting Session
+$_SESSION;          // is a global variable that can be accessed by any page  in the site. It allows you to store information
 
-// Query the view_student_faculty to retrieve user details
+include ("../connection.php");  //connecting to the database
+include ("../functions.php");   //calling the functions
+
+global $user_data;
+$user_data = check_login($con);     // to check whether the user is logged in
+
+
+
+// view of students due to return book today
+function view_student_faculty()
+{
+    include ("../connection.php");
+    // Query the view_student_faculty to retrieve user details
 $query = "SELECT * FROM view_student_faculty";
-$result = mysqli_query($con, $query);
 
-// Check if query executed successfully
-if ($result) {
-    // Display user details in a table
-    echo "<table border='1'>";
-    echo "<tr><th>User ID</th><th>User Type</th><th>User Name</th><th>User Email</th></tr>";
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "<tr>";
-        echo "<td>" . $row['user_id'] . "</td>";
-        echo "<td>" . $row['user_type'] . "</td>";
-        echo "<td>" . $row['college_id'] . "</td>";
-        echo "<td>" . $row['user_fname'] . "</td>";
-        echo "<td>" . $row['user_lname'] . "</td>";
-        echo "<td>" . $row['user_email'] . "</td>";
-        echo "<td>" . $row['user_phone'] . "</td>";
-        echo "</tr>";
-    }
-    echo "</table>";
-} else {
-    // Display an error message if query fails
-    echo "Error: " . mysqli_error($con);
+    return ($query);
 }
-
-// Close the database connection
-// mysqli_close($con);
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* CSS styles for the sidebar */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            /* Dark background color */
+            padding-top: 20px;
+            color: #fff;
+            /* Text color */
+            overflow-y: auto;
+            /* Enable scrolling if content exceeds height */
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+            /* Darker background color on hover */
+        }
+
+        /* CSS styles for the main content */
+        .content {
+            margin-left: 250px;
+            /* Adjust this value to match the width of your sidebar */
+            padding: 20px;
+        }
+
+        .profile-pic img {
+            border-radius: 50%;
+            /* Make the profile picture round */
+        }
+
+        h1 {
+            color: #495057;
+            /* Text color for the heading */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">My Website</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Settings
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="../changePassword.php">Change Password</a>
+                        <a class="dropdown-item" href="../logout.php">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="sidebar">
+
+        <div class="side-bar-margin" style="margin: 40px">
+
+            <div class="profile-pic">
+                <img src="../images/dummypic.png" alt="dummy profile" height="150px" width="150px">
+
+            </div>
+
+            <br><br><br>
+            <ul>
+                <li><a href="issueBooks.php">Issue Books</a></li>
+                <li><a href="returnBooks.php">Return Books</a></li>
+                <li><a href="addBooks.php">Add Books</a></li>
+                <li><a href="manageBooks.php">Manage Books</a></li>
+                <li><a href="staffViewUsers.php">View Users</a></li>
+                <!-- <li><a href="#">Notifications</a></li> -->
+            </ul>
+        </div>
+
+
+    </div>
+
+
+    <div class="content">
+
+        
+
+        <center>
+            <h4 style="margin: 25px">Details of all students and faculties</h4><br>
+        </center>
+        <hr width=100% align="left"><br><br>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form>
+                    <table class="table-bordered" width="900px" style="text-align: center">
+                        <tr>
+                            <th>COLLEGE ID</th>
+                            <th>STUDENT/FACULTY</th>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>PHONE NO.</th>
+                            <th>BOOKS BORROWED</th>
+                        </tr>
+
+                        <?php
+
+                        $query_run = mysqli_query($con, view_student_faculty());
+                        while ($row = mysqli_fetch_assoc($query_run)) {
+                            ?>
+                            <tr>
+                                
+                                <td>
+                                    <?php echo $row['college_id']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['user_type']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['user_fname'], " ", $row['user_lname']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['user_email']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['user_phone']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['borrowed_books_count']; ?>
+                                </td>
+                            </tr>
+
+                            <?php
+                        }
+                        ?>
+                    </table>
+
+
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+            <div class="col-md-2"></div>
+        </div>
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
