@@ -1,12 +1,13 @@
 @todo:
 
     resolve:
+        - staff view users
+        - due date --> if faculty: 31st may else: 7 days later
 
     create:
         - return book
         - fine calculation
-        - staff view users
-        - trigger -> inc borrowed copies + dec available_copies
+        
 
     display users
     search books/ users
