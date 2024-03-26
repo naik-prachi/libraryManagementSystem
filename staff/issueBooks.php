@@ -17,12 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="../bootstrap-4.4.1/css/bootstrap.min.css">
 	<script type="text/javascript" src="../bootstrap-4.4.1/js/juqery_latest.js"></script>
 	<script type="text/javascript" src="../bootstrap-4.4.1/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-		function alertMsg() {
-			alert("Book added successfully...");
-			window.location.href = "staffHomepage.php";
-		}
-	</script>
+	
 </head>
 
 <body>
@@ -77,9 +72,7 @@
 			</ul>
 		</div>
 	</nav><br>
-	<span>
-		<marquee>This is library mangement system. Library opens at 8:00 AM and close at 8:00 PM</marquee>
-	</span><br><br>
+	<br><br>
 	<center>
 		<h4>Issue Book</h4><br>
 	</center>
