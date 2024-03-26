@@ -19,6 +19,44 @@
 
 
 
+
+
+// stored precedure...
+    DELIMITER //
+
+    CREATE PROCEDURE IssueBook(IN issuedid BIGINT, IN ISBNO VARCHAR(16), IN collegeid VARCHAR(15), IN issuedate DATE, IN duedate DATE)
+    BEGIN
+        DECLARE available_copies INT;
+        DECLARE user_due_books INT;
+        
+        -- Check if the user has any due books
+        SELECT COUNT(*) INTO user_due_books 
+        FROM issuedbook
+        WHERE college_id = collegeid AND returned_date IS NULL;
+        
+        IF user_due_books > 5 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'User has due books. Cannot issue more books.';
+        END IF;
+        
+        -- Check if the book is available
+        SELECT available_copies INTO available_copies 
+        FROM books 
+        WHERE ISBN = ISBNO;
+        
+        IF available_copies <= 0 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No available copies of this book.';
+        END IF;
+        
+        -- Issue the book
+        INSERT INTO issuedbook (issued_id, ISBN, college_id, issue_date, due_date) 
+        VALUES (issuedid, ISBNO, collegeid, issuedate, duedate);
+        
+        COMMIT;
+    END;
+    //
+
+    DELIMITER ;
+
 //updateBooks.php
         <?php
             session_start();

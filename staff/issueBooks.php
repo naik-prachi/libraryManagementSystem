@@ -150,7 +150,13 @@
 <?php
 	if (isset($_POST['issue_book'])) {
         include("../connection.php");
-        $issued_id = random_num(20);
+
+		// Prepare and bind parameters
+		$stmt = $con->prepare("CALL IssueBook(?, ?, ?, ?, ?)");
+		$stmt->bind_param("issss", $issued_id, $ISBN, $college_id, $issue_date, $due_date);
+
+		// Set parameters and execute
+		$issued_id = random_num(20);
 
         // Sanitize user inputs to prevent SQL injection
         $ISBN = mysqli_real_escape_string($con, $_POST['ISBN']);
@@ -160,18 +166,48 @@
 
         // Ensure due_date is in the correct format (YYYY-MM-DD) for MySQL
         $due_date = date('Y-m-d', strtotime($due_date));
+		$stmt->execute();
 
-        // Construct the SQL query with sanitized values
-        $query = "INSERT INTO issuedbook (issued_id, ISBN, college_id, issue_date, due_date) VALUES ('$issued_id', '$ISBN', '$college_id', '$issue_date', '$due_date')";
+		
+		$result = mysqli_query($con, $query);
 
-        $query_run = mysqli_query($con, $query);
+            if ($result) {
+                // Display success message and redirect
+                echo '<script>alert("Book issue is successful!")</script>';
+                echo '<script>window.setTimeout(function(){ window.location.href = "issueBooks.php"; }, 400);</script>';
+				// Close statement
+		$stmt->close();
+                die;
+
+            } else {
+                echo "Error: " . mysqli_error($con);
+            }
+		}
+		
+
+
+        // $issued_id = random_num(20);
+
+        // // Sanitize user inputs to prevent SQL injection
+        // $ISBN = mysqli_real_escape_string($con, $_POST['ISBN']);
+        // $college_id = mysqli_real_escape_string($con, $_POST['college_id']);
+        // $issue_date = mysqli_real_escape_string($con, $_POST['issue_date']);
+        // $due_date = mysqli_real_escape_string($con, $_POST['due_date']);
+
+        // // Ensure due_date is in the correct format (YYYY-MM-DD) for MySQL
+        // $due_date = date('Y-m-d', strtotime($due_date));
+
+        // // Construct the SQL query with sanitized values
+        // // $query = "INSERT INTO issuedbook (issued_id, ISBN, college_id, issue_date, due_date) VALUES ('$issued_id', '$ISBN', '$college_id', '$issue_date', '$due_date')";
+
+        // $query_run = mysqli_query($con, $query);
 
         // Check if the query was successful
-        if ($query_run) {
-            header("Location: staffHomepage.php");
-            exit; // exit script to prevent further execution
-        } else {
-            echo "Error: " . mysqli_error($con);
-        }
-    }
+        // if ($query_run) {
+        //     header("Location: staffHomepage.php");
+        //     exit; // exit script to prevent further execution
+        // } else {
+        //     echo "Error: " . mysqli_error($con);
+        // }
+    // }
 ?>

@@ -7,7 +7,7 @@
 
     $user_data = check_login($con);
 
-    function get_user_issue_book_count()
+    function get_borrowed_book_count()
     {
         include ("../connection.php");
         $user_data = check_login($con);
@@ -20,7 +20,7 @@
         return ($user_issue_book_count);
     }
 
-    function get_user_due_book_count()
+    function get_book_due_count()
     {
         include ("../connection.php");
         $user_data = check_login($con);
@@ -33,7 +33,7 @@
         return ($user_due_book_count);
     }
 
-    function view_issued_book()
+    function view_students_book_due()
     {
         include ("../connection.php");
         $user_data = check_login($con);
@@ -97,7 +97,7 @@
                     <div class="card-header">Book Issued</div>
                     <div class="card-body">
                         <p class="card-text">No of book issued:
-                            <?php echo get_user_issue_book_count(); ?>
+                            <?php echo get_borrowed_book_count(); ?>
                         </p>
                         <!-- <a class="btn btn-success" href="view_issued_book.php">View Issued Books</a> -->
                     </div>
@@ -109,7 +109,7 @@
                     <div class="card-header">Book Due Today</div>
                     <div class="card-body">
                         <p class="card-text">No of book due:
-                            <?php echo get_user_due_book_count(); ?>
+                            <?php echo get_book_due_count(); ?>
                         </p>
                         <!-- <a class="btn btn-success" href="view_issued_book.php">View Issued Books</a> -->
                     </div>
@@ -135,7 +135,7 @@
                     
                         <?php
                         
-                            $query_run = mysqli_query($con, view_issued_book());
+                            $query_run = mysqli_query($con, view_students_book_due());
                             while ($row = mysqli_fetch_assoc($query_run)){
                                 ?>
                                 <tr>
