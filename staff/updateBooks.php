@@ -6,15 +6,15 @@
 	$user_data = check_login($con);
 
 	$query = "SELECT * FROM books WHERE ISBN = $_GET[bn]";
-	$query_run = mysqli_query($con,$query);
-	while ($row = mysqli_fetch_assoc($query_run)){
-		$ISBN = $row['ISBN'];
-		$book_title = $row['book_title'];
-		$book_author = $row['book_author'];
-		$book_subject = $row['book_subject'];
-		$total_copies = $row['total_copies'];
-		$borrowed_copies = $row['borrowed_copies'];
-        $available_copies = $row['available_copies'];
+	$result = mysqli_query($con,$query);
+	while ($user = mysqli_fetch_assoc($result)){
+		$ISBN = $user['ISBN'];
+		$book_title = $user['book_title'];
+		$book_author = $user['book_author'];
+		$book_subject = $user['book_subject'];
+		$total_copies = $user['total_copies'];
+		$borrowed_copies = $user['borrowed_copies'];
+        $available_copies = $user['available_copies'];
 	}
 
 
@@ -25,7 +25,7 @@
                 borrowed_copies = $_POST[new_borrowed_copies], available_copies = $_POST[new_available_copies]
                 where ISBN = $_GET[bn]";
 
-		$query_run = mysqli_query($con,$query);
+		$result = mysqli_query($con,$query);
 		header("location: manageBooks.php");
 	}
 ?>

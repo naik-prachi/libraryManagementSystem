@@ -117,11 +117,12 @@ $query = "SELECT * FROM view_student_faculty";
 
             <br><br><br>
             <ul>
+                <li><a href="staffHomepage.php">Home</a></li>
                 <li><a href="issueBooks.php">Issue Books</a></li>
                 <li><a href="returnBooks.php">Return Books</a></li>
                 <li><a href="addBooks.php">Add Books</a></li>
                 <li><a href="manageBooks.php">Manage Books</a></li>
-                <li><a href="staffViewUsers.php">View Users</a></li>
+                <!-- <li><a href="staffViewUsers.php">View Users</a></li> -->
                 <!-- <li><a href="#">Notifications</a></li> -->
             </ul>
         </div>
@@ -154,28 +155,28 @@ $query = "SELECT * FROM view_student_faculty";
 
                         <?php
 
-                        $query_run = mysqli_query($con, view_student_faculty());
-                        while ($row = mysqli_fetch_assoc($query_run)) {
+                        $result = mysqli_query($con, view_student_faculty());
+                        while ($user = mysqli_fetch_assoc($result)) {
                             ?>
                             <tr>
                                 
                                 <td>
-                                    <?php echo $row['college_id']; ?>
+                                    <?php echo $user['college_id']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['user_type']; ?>
+                                    <?php echo $user['user_type']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['user_fname'], " ", $row['user_lname']; ?>
+                                    <?php echo $user['user_fname'], " ", $user['user_lname']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['user_email']; ?>
+                                    <?php echo $user['user_email']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['user_phone']; ?>
+                                    <?php echo $user['user_phone']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['borrowed_books_count']; ?>
+                                    <?php echo $user['borrowed_books_count']; ?>
                                 </td>
                             </tr>
 

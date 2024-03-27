@@ -99,19 +99,19 @@
 					</thead>
 					<?php
 						$query = "select * from users";
-						$query_run = mysqli_query($con,$query);
-						while ($row = mysqli_fetch_assoc($query_run)){
+						$result = mysqli_query($con,$query);
+						while ($user = mysqli_fetch_assoc($result)){
 							?>
 							<tr>
-                                <td><?php echo $row['user_type'];?></td>
-								<td><?php echo $row['college_id'];?></td>
-								<td><?php echo $row['user_fname'];?></td>
-								<td><?php echo $row['user_lname'];?></td>
-								<td><?php echo $row['user_email'];?></td>
-								<td><?php echo $row['user_phone'];?></td>
+                                <td><?php echo $user['user_type'];?></td>
+								<td><?php echo $user['college_id'];?></td>
+								<td><?php echo $user['user_fname'];?></td>
+								<td><?php echo $user['user_lname'];?></td>
+								<td><?php echo $user['user_email'];?></td>
+								<td><?php echo $user['user_phone'];?></td>
                                 
-								<td><button class="btn" name=""><a href="updateUsers.php?cid=<?php echo $row['college_id'];?>">Update</a></button>
-								<button class="btn"><a href="removeUsers.php?cid=<?php echo $row['college_id'];?>">Delete</a></button></td>
+								<td><button class="btn" name=""><a href="updateUsers.php?cid=<?php echo $user['college_id'];?>">Update</a></button>
+								<button class="btn"><a href="removeUsers.php?cid=<?php echo $user['college_id'];?>">Delete</a></button></td>
 							</tr>
 							<?php
 						}

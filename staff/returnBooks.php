@@ -44,7 +44,7 @@
 	<script type="text/javascript" src="../bootstrap-4.4.1/js/juqery_latest.js"></script>
 	<script type="text/javascript" src="../bootstrap-4.4.1/js/bootstrap.min.js"></script>
 	
-</head>
+<!-- </head>
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -97,7 +97,107 @@
 				</li>
 			</ul>
 		</div>
-	</nav><br>
+	</nav><br> -->
+	<style>
+        /* CSS styles for the sidebar */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            /* Dark background color */
+            padding-top: 20px;
+            color: #fff;
+            /* Text color */
+            overflow-y: auto;
+            /* Enable scrolling if content exceeds height */
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+            /* Darker background color on hover */
+        }
+
+        /* CSS styles for the main content */
+        .content {
+            margin-left: 250px;
+            /* Adjust this value to match the width of your sidebar */
+            padding: 20px;
+        }
+
+        .profile-pic img {
+            border-radius: 50%;
+            /* Make the profile picture round */
+        }
+
+        h1 {
+            color: #495057;
+            /* Text color for the heading */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">My Website</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Settings
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="../changePassword.php">Change Password</a>
+                        <a class="dropdown-item" href="../logout.php">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="sidebar">
+
+        <div class="side-bar-margin" style="margin: 40px">
+
+            <div class="profile-pic">
+                <img src="../images/dummypic.png" alt="dummy profile" height="150px" width="150px">
+
+            </div>
+
+            <br><br><br>
+            <ul>
+                <li><a href="staffHomepage.php">Home</a></li>
+                <li><a href="issueBooks.php">Issue Books</a></li>
+                <!-- <li><a href="returnBooks.php">Return Books</a></li> -->
+                <li><a href="addBooks.php">Add Books</a></li>
+                <li><a href="manageBooks.php">Manage Books</a></li>
+                <li><a href="staffViewUsers.php">View Users</a></li>
+                <!-- <li><a href="#">Notifications</a></li> -->
+            </ul>
+        </div>
+
+
+    </div>
 	<br><br>
 	<center>
 		<h4>Book Return</h4><br>
@@ -116,11 +216,11 @@
 						<option>-Select College ID-</option>
 						<?php
 						$query = "SELECT DISTINCT college_id FROM users WHERE user_type = 'Student' OR user_type = 'Faculty'";
-						$query_run = mysqli_query($con, $query);
-						while ($row = mysqli_fetch_assoc($query_run)) {
+						$result = mysqli_query($con, $query);
+						while ($user = mysqli_fetch_assoc($result)) {
 							?>
 							<option>
-								<?php echo $row['college_id']; ?>
+								<?php echo $user['college_id']; ?>
 							</option>
 							<?php
 						}
@@ -135,11 +235,11 @@
 						<option>-Select ISBN-</option>
 						<?php
 						$query = "SELECT DISTINCT ISBN FROM issuedbook";
-						$query_run = mysqli_query($con, $query);
-						while ($row = mysqli_fetch_assoc($query_run)) {
+						$result = mysqli_query($con, $query);
+						while ($user = mysqli_fetch_assoc($result)) {
 							?>
 							<option>
-								<?php echo $row['ISBN']; ?>
+								<?php echo $user['ISBN']; ?>
 							</option>
 							<?php
 						}
@@ -155,7 +255,7 @@
 				</div> -->
 
 
-				<button type="submit" name="return_book" class="btn btn-primary">Retrun Book</button>
+				<button type="submit" name="return_book" class="btn btn-primary">Return Book</button>
 			</form>
 
 		</div>
@@ -182,10 +282,10 @@
         // Construct the SQL query with sanitized values
         $query = "INSERT INTO issuedbook (issued_id, ISBN, college_id, issue_date, due_date) VALUES ('$issued_id', '$ISBN', '$college_id', '$issue_date', '$due_date')";
 
-        $query_run = mysqli_query($con, $query);
+        $result = mysqli_query($con, $query);
 
         // Check if the query was successful
-        if ($query_run) {
+        if ($result) {
             header("Location: staffHomepage.php");
             exit; // exit script to prevent further execution
         } else {

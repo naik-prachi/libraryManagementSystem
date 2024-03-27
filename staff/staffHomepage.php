@@ -267,27 +267,27 @@ function view_students_past_due()
 
                         <?php
 
-                        $query_run = mysqli_query($con, view_students_past_due());
-                        while ($row = mysqli_fetch_assoc($query_run)) {
+                        $result = mysqli_query($con, view_students_past_due());
+                        while ($user = mysqli_fetch_assoc($result)) {
                             ?>
                             <tr>
                                 <td>
-                                    <?php echo $row['ISBN']; ?>
+                                    <?php echo $user['ISBN']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['book_title']; ?>
+                                    <?php echo $user['book_title']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['college_id']; ?>
+                                    <?php echo $user['college_id']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['user_fname'], " ", $row['user_lname']; ?>
+                                    <?php echo $user['user_fname'], " ", $user['user_lname']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['user_email']; ?>
+                                    <?php echo $user['user_email']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['due_date']; ?>
+                                    <?php echo $user['due_date']; ?>
                                 </td>
 
                             </tr>
@@ -329,27 +329,27 @@ function view_students_past_due()
 
                         <?php
 
-                        $query_run = mysqli_query($con, view_students_due_today());
-                        while ($row = mysqli_fetch_assoc($query_run)) {
+                        $result = mysqli_query($con, view_students_due_today());
+                        while ($user = mysqli_fetch_assoc($result)) {
                             ?>
                             <tr>
                                 <td>
-                                    <?php echo $row['ISBN']; ?>
+                                    <?php echo $user['ISBN']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['book_title']; ?>
+                                    <?php echo $user['book_title']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['college_id']; ?>
+                                    <?php echo $user['college_id']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['user_fname'], " ", $row['user_lname']; ?>
+                                    <?php echo $user['user_fname'], " ", $user['user_lname']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['user_email']; ?>
+                                    <?php echo $user['user_email']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['issue_date']; ?>
+                                    <?php echo $user['issue_date']; ?>
                                 </td>
 
                             </tr>
@@ -393,30 +393,30 @@ function view_students_past_due()
 
                         <?php
 
-                        $query_run = mysqli_query($con, view_issued_book());
-                        while ($row = mysqli_fetch_assoc($query_run)) {
+                        $result = mysqli_query($con, view_issued_book());
+                        while ($user = mysqli_fetch_assoc($result)) {
                             ?>
                             <tr>
                                 <td>
-                                    <?php echo $row['ISBN']; ?>
+                                    <?php echo $user['ISBN']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['book_title']; ?>
+                                    <?php echo $user['book_title']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['college_id']; ?>
+                                    <?php echo $user['college_id']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['user_fname'], " ", $row['user_lname']; ?>
+                                    <?php echo $user['user_fname'], " ", $user['user_lname']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['user_email']; ?>
+                                    <?php echo $user['user_email']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['issue_date']; ?>
+                                    <?php echo $user['issue_date']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['due_date']; ?>
+                                    <?php echo $user['due_date']; ?>
                                 </td>
 
                             </tr>

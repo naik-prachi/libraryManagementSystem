@@ -88,11 +88,11 @@
 						<option>-Select ISBN-</option>
 						<?php
 						$query = "SELECT ISBN FROM books";
-						$query_run = mysqli_query($con, $query);
-						while ($row = mysqli_fetch_assoc($query_run)) {
+						$result = mysqli_query($con, $query);
+						while ($user = mysqli_fetch_assoc($result)) {
 							?>
 							<option>
-								<?php echo $row['ISBN']; ?>
+								<?php echo $user['ISBN']; ?>
 							</option>
 							<?php
 						}
@@ -107,11 +107,11 @@
 						<option>-Select College ID-</option>
 						<?php
 						$query = "SELECT college_id FROM users WHERE user_type = 'Student' OR user_type = 'Faculty'";
-						$query_run = mysqli_query($con, $query);
-						while ($row = mysqli_fetch_assoc($query_run)) {
+						$result = mysqli_query($con, $query);
+						while ($user = mysqli_fetch_assoc($result)) {
 							?>
 							<option>
-								<?php echo $row['college_id']; ?>
+								<?php echo $user['college_id']; ?>
 							</option>
 							<?php
 						}

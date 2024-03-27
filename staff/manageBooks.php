@@ -105,19 +105,19 @@
 					</thead>
 					<?php
 						$query = "select * from books";
-						$query_run = mysqli_query($con,$query);
-						while ($row = mysqli_fetch_assoc($query_run)){
+						$result = mysqli_query($con,$query);
+						while ($user = mysqli_fetch_assoc($result)){
 							?>
 							<tr>
-                                <td><?php echo $row['ISBN'];?></td>
-								<td><?php echo $row['book_title'];?></td>
-								<td><?php echo $row['book_author'];?></td>
-								<td><?php echo $row['book_subject'];?></td>
-								<td><?php echo $row['total_copies'];?></td>
-								<td><?php echo $row['available_copies'];?></td>
-                                <td><?php echo $row['borrowed_copies'];?></td>
-								<td><button class="btn" name=""><a href="updateBooks.php?bn=<?php echo $row['ISBN'];?>">Update</a></button>
-								<button class="btn"><a href="removeBook.php?bn=<?php echo $row['ISBN'];?>">Delete</a></button></td>
+                                <td><?php echo $user['ISBN'];?></td>
+								<td><?php echo $user['book_title'];?></td>
+								<td><?php echo $user['book_author'];?></td>
+								<td><?php echo $user['book_subject'];?></td>
+								<td><?php echo $user['total_copies'];?></td>
+								<td><?php echo $user['available_copies'];?></td>
+                                <td><?php echo $user['borrowed_copies'];?></td>
+								<td><button class="btn" name=""><a href="updateBooks.php?bn=<?php echo $user['ISBN'];?>">Update</a></button>
+								<button class="btn"><a href="removeBook.php?bn=<?php echo $user['ISBN'];?>">Delete</a></button></td>
 							</tr>
 							<?php
 						}

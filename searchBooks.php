@@ -14,12 +14,12 @@
         echo "<tr><th>Book no</th><th>Title</th><th>Author</th></tr>";
 
         // Output data of each row
-        while($row = mysqli_fetch_assoc($result)) {
+        while($user = mysqli_fetch_assoc($result)) {
             // Display the details of each book within table rows
             echo "<tr>";
-            echo "<td>" . $row["ISBN"] . "</td>";
-            echo "<td>" . $row["book_title"] . "</td>";
-            echo "<td>" . $row["book_author"] . "</td>";
+            echo "<td>" . $user["ISBN"] . "</td>";
+            echo "<td>" . $user["book_title"] . "</td>";
+            echo "<td>" . $user["book_author"] . "</td>";
             echo "</tr>";
         }
         echo "</table>";

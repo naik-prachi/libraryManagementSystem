@@ -12,15 +12,15 @@
         // Display user details in a table
         echo "<table border='1'>";
         echo "<tr><th>User ID</th><th>User Type</th><th>User Name</th><th>User Email</th></tr>";
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($user = mysqli_fetch_assoc($result)) {
             echo "<tr>";
-            echo "<td>" . $row['user_id'] . "</td>";
-            echo "<td>" . $row['user_type'] . "</td>";
-            echo "<td>" . $row['college_id'] . "</td>";
-            echo "<td>" . $row['user_fname'] . "</td>";
-            echo "<td>" . $row['user_lname'] . "</td>";
-            echo "<td>" . $row['user_email'] . "</td>";
-            echo "<td>" . $row['user_phone'] . "</td>";
+            echo "<td>" . $user['user_id'] . "</td>";
+            echo "<td>" . $user['user_type'] . "</td>";
+            echo "<td>" . $user['college_id'] . "</td>";
+            echo "<td>" . $user['user_fname'] . "</td>";
+            echo "<td>" . $user['user_lname'] . "</td>";
+            echo "<td>" . $user['user_email'] . "</td>";
+            echo "<td>" . $user['user_phone'] . "</td>";
             echo "</tr>";
         }
         echo "</table>";

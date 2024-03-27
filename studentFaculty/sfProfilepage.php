@@ -88,9 +88,7 @@
                 </ul>
             </div>
         </nav><br>
-        <span>
-            <marquee>This is library mangement system. Library opens at 8:00 AM and close at 8:00 PM</marquee>
-        </span><br><br>
+        
         <div class="row">
             <div class="col-sm-*" style="margin: 25px">
                 <div class="card bg-light" style="width: 300px">
@@ -135,15 +133,15 @@
                     
                         <?php
                         
-                            $query_run = mysqli_query($con, view_students_book_due());
-                            while ($row = mysqli_fetch_assoc($query_run)){
+                            $result = mysqli_query($con, view_students_book_due());
+                            while ($user = mysqli_fetch_assoc($result)){
                                 ?>
                                 <tr>
-                                <td><?php echo $row['ISBN'];?></td>
-                                <td><?php echo $row['book_title'];?></td>
-                                <td><?php echo $row['book_author'];?></td>
-                                <td><?php echo $row['issue_date'];?></td>
-                                <td><?php echo $row['due_date'];?></td>
+                                <td><?php echo $user['ISBN'];?></td>
+                                <td><?php echo $user['book_title'];?></td>
+                                <td><?php echo $user['book_author'];?></td>
+                                <td><?php echo $user['issue_date'];?></td>
+                                <td><?php echo $user['due_date'];?></td>
                                 
                             </tr>
 
