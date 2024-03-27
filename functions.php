@@ -96,14 +96,107 @@ function view_students_book_due()
     return ($query);
 }
 
-// $due_today = 0;
-// $query = "SELECT count(*) AS due_today count 
-//         from issuedbook where due_date = CURDATE() 
-//         AND college_id = $user_data[college_id]";
-// $result = mysqli_query($con, $query);
-// if ($due_today > 0) {
-//     // display alert box
-//     echo '<script>alert("BOOK(s) due today! Please return on time to avoid fine.")</script>';    
-// }
+// get count of borrowed copies
+function get_borrowed_book_count()
+{
+    include ("../connection.php");
+    $borrowed_book_count = 0;
+    $query = "SELECT sum(borrowed_copies) AS borrowed_copy_count FROM books";
+    $query_run = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_assoc($query_run)) {
+        $borrowed_book_count = $row['borrowed_copy_count'];
+    }
+    return ($borrowed_book_count);
+}
+
+// to return count of books that are past their due
+function get_past_due_count()
+{
+    include ("../connection.php");
+    $past_due_count = 0;
+    $query = "SELECT count(*) AS past_due_count 
+            FROM issuedbook
+            WHERE due_date < CURDATE() AND returned_date IS NULL";
+    $query_run = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_assoc($query_run)) {
+        $past_due_count = $row['past_due_count'];
+    }
+    return ($past_due_count);
+}
+
+// to return count of books that are due for return
+function get_due_book_count()
+{
+    include ("../connection.php");
+    $due_book_count = 0;
+    $query = "SELECT count(*) as due_book_count from issuedbook where due_date = CURDATE()";
+    $query_run = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_assoc($query_run)) {
+        $due_book_count = $row['due_book_count'];
+    }
+    return ($due_book_count);
+}
+
+// view of students due to return book today
+function view_issued_book()
+{
+    include ("../connection.php");
+    $user_data = check_login($con);
+
+    // join table books and issuedbook
+    $query = "SELECT * FROM issuedbook i 
+          JOIN books b ON i.ISBN = b.ISBN 
+          JOIN users u ON i.college_id = u.college_id
+          WHERE i.due_date > CURDATE() AND i.returned_date IS NULL";
+
+    return ($query);
+}
+
+// to show students/faculties whos books are due today
+function view_students_due_today()
+{
+    include ("../connection.php");
+
+    // join table books and issuedbook
+    $query = "SELECT * FROM issuedbook i 
+          JOIN books b ON i.ISBN = b.ISBN 
+          JOIN users u ON i.college_id = u.college_id
+          WHERE i.due_date = CURDATE() AND i.returned_date IS NULL";
+
+    return ($query);
+}
+
+// to show details of students and faculty who have past due books
+function view_students_past_due()
+{
+    include ("../connection.php");
+
+    // join table books and issuedbook
+    $query = "SELECT * FROM issuedbook i 
+          JOIN books b ON i.ISBN = b.ISBN 
+          JOIN users u ON i.college_id = u.college_id
+          WHERE i.due_date < CURDATE() AND i.returned_date IS NULL";
+
+    return ($query);
+}
+
+// VIEW to view details of students and faculties
+function view_student_faculty()
+{
+    include ("../connection.php");
+    // Query the view_student_faculty to retrieve user details
+$query = "SELECT * FROM view_student_faculty";
+
+    return ($query);
+}
+
+    function view_all_books()
+{
+    include ("../connection.php");
+    // Query the view_student_faculty to retrieve user details
+$query = "SELECT ISBN, book_title, book_author, book_subject, available_copies FROM books";
+
+    return ($query);
+}
 
 

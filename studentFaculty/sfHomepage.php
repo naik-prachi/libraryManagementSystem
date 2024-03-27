@@ -1,16 +1,14 @@
 <!-- acts as a website -->
 <?php
-session_start();        //  Starting Session
-$_SESSION;          // is a global variable that can be accessed by any page  in the site. It allows you to store information
+    session_start();        //  Starting Session
+    $_SESSION;          // is a global variable that can be accessed by any page  in the site. It allows you to store information
 
-include ("../connection.php");  //connecting to the database
-include ("../functions.php");   //calling the functions
-
-
-global $user_data;
-$user_data = check_login($con);     // to check whether the user is logged in
+    include ("../connection.php");  //connecting to the database
+    include ("../functions.php");   //calling the functions
 
 
+    global $user_data;
+    $user_data = check_login($con);     // to check whether the user is logged in
 
 ?>
 
@@ -57,7 +55,7 @@ $user_data = check_login($con);     // to check whether the user is logged in
 
         <br><br><br>
         <ul>
-            <br><a href="../searchBooks.php">Search books</a>
+            <br><a href="sfViewBooks.php">Search books</a>
             <!-- <br><a href="#">Notifications</a> -->
             <!-- <br><a href="sfProfilepage.php">Profile</a> -->
 

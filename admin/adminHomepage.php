@@ -125,7 +125,7 @@ function view_staff()
                 <a href="addUsers.php">Add users</a>
                 <br><a href="manageUsers.php">Manage users</a>
                 <!-- <br><a href="searchUsers.php">Search users</a> -->
-                <br><a href="searchBooks.php">Search books</a>
+                <br><a href="adminViewBooks.php">Search books</a>
                 <!-- <br><a href="profilePage.php">Profile</a> -->
 
                 <br><br><br><br><br>
