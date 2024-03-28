@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $user_fname = $_POST['user_fname'];
     $user_lname = $_POST['user_lname'];
     $user_email = $_POST['user_email'];
+    $user_phone = $_POST['user_phone'];
     $password = $_POST['password'];
     $conPwd = $_POST['conPwd'];
 

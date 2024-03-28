@@ -11,7 +11,7 @@
         // join table books and issuedbook
         $query = "UPDATE issuedbook
                     SET returned_date = CURDATE() 
-                    WHERE college_id = '$_POST[college_id]'";
+                    WHERE college_id = '$_POST[college_id]' AND ISBN = '$_POST[ISBN]'";
 
         $result = mysqli_query($con, $query);
 
