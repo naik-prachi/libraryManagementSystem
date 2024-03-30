@@ -85,279 +85,257 @@ function view_staff()
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>my Website</title>
+    <title>Library Management System</title>
 
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
     <style>
-        /* CSS styles for the sidebar */
+        /* Sidebar Styles */
         .sidebar {
             height: 100%;
             width: 250px;
             position: fixed;
             top: 0;
             left: 0;
-            background-color: #f8f9fa;
+            background-color: #343a40; /* Dark background color */
             padding-top: 20px;
+            color: #fff; /* Text color */
         }
 
-        /* CSS styles for the main content */
+        /* Main Content Styles */
         .content {
             margin-left: 250px;
-            /* Adjust this value to match the width of your sidebar */
             padding: 20px;
+        }
+
+        /* Card Styles */
+        .card {
+            margin-bottom: 20px;
+        }
+
+        /* Profile Picture Styles */
+        .profile-pic img {
+            border-radius: 50%;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #343a40; /* Dark background color for table headers */
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Light background color for even rows */
         }
     </style>
 </head>
 
 <body>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-    <body>
-        <div class="sidebar">
-
-            <div class="profile-pic">
-                <img src="../images/dummypic.png" alt="dummy profile" height="150px" width="150px">
-                <br><br>
-                Hello!
-            </div>
-
-            <br><br><br>
-            <ul>
-                <a href="addUsers.php">Add users</a>
-                <br><a href="manageUsers.php">Manage users</a>
-                <!-- <br><a href="searchUsers.php">Search users</a> -->
-                <br><a href="adminViewBooks.php">Search books</a>
-                <!-- <br><a href="profilePage.php">Profile</a> -->
-
-                <br><br><br><br><br>
-                <a href="../logout.php">Log Out</a><br />
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Settings
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Change Password</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="../logout.php">Logout</a>
+                    </div>
+                </li>
             </ul>
+        </div>
+    </nav>
 
+
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile-pic text-center">
+            <img src="../images/dummypic.png" alt="dummy profile" height="150px" width="150px">
+            <br><br>
+            <h5>Hello, <?php echo $user_data['user_fname'], " ", $user_data['user_lname']; ?></h5>
         </div>
 
+        <br><br><br>
 
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="addUsers.php">Add Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="manageUsers.php">Manage Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="adminViewBooks.php">Search Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../logout.php">Log Out</a>
+            </li>
+        </ul>
+    </div>
 
-
-        <div class="content">
-            <h4 style="margin: 20px">Welcome,
-                <?php echo $user_data['user_fname'], " ", $user_data['user_lname']; ?>
-            </h4>
-
+    <!-- Main Content -->
+    <div class="content">
+        <div class="container">
             <div class="row">
-                <div class="col-sm-*" style="margin: 25px">
-                    <div class="card bg-light" style="width: 300px">
+                <div class="col-md-4">
+                    <div class="card bg-light">
                         <div class="card-header">STUDENTS</div>
                         <div class="card-body">
-                            <p class="card-text">No. of students:
-                                <?php echo get_student_count(); ?>
-                            </p>
-                            <!-- <a class="btn btn-success" href="view_issued_book.php">View Issued Books</a> -->
+                            <p class="card-text">No. of students: <?php echo get_student_count(); ?></p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-*" style="margin: 25px">
-                    <div class="card bg-light" style="width: 300px">
+                <div class="col-md-4">
+                    <div class="card bg-light">
                         <div class="card-header">FACULTY</div>
                         <div class="card-body">
-                            <p class="card-text">No of faculties:
-                                <?php echo get_faculty_count(); ?>
-                            </p>
-                            <!-- <a class="btn btn-success" href="view_issued_book.php">View Issued Books</a> -->
+                            <p class="card-text">No. of faculties: <?php echo get_faculty_count(); ?></p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-*" style="margin: 25px">
-                    <div class="card bg-light" style="width: 300px">
+                <div class="col-md-4">
+                    <div class="card bg-light">
                         <div class="card-header">LIBRARY STAFF</div>
                         <div class="card-body">
-                            <p class="card-text">No. of staff:
-                                <?php echo get_staff_count(); ?>
-                            </p>
-                            <!-- <a class="btn btn-success" href="view_issued_book.php">View Issued Books</a> -->
+                            <p class="card-text">No. of staff: <?php echo get_staff_count(); ?></p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <br><br><br><br>
+            <hr>
 
-                <center>
-                    <h4>  STUDENT DETAILS  </h4><br>
-                </center>
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        <form>
-                            <table class="table-bordered" width="900px" style="text-align: center">
-                                <tr>
-                                    <th>COLLEGE ID</th>
-                                    <th>FIRST NAME</th>
-                                    <th>LAST NAME</th>
-                                    <th>EMAIL</th>
-                                    <th>PHONE NO.</th>
-                                </tr>
-
-                                <?php
-
-                                $result = mysqli_query($con, view_students());
-                                while ($user = mysqli_fetch_assoc($result)) {
-                                    ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $user['college_id']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $user['user_fname']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $user['user_lname']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $user['user_email']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $user['user_phone']; ?>
-                                        </td>
-
-                                    </tr>
-
-                                    <?php
-                                }
-                                ?>
-                            </table>
-
-
-                        </form>
-                    </div>
-                    <div class="col-md-2"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>STUDENT DETAILS</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>COLLEGE ID</th>
+                                <th>FIRST NAME</th>
+                                <th>LAST NAME</th>
+                                <th>EMAIL</th>
+                                <th>PHONE NO.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $result = mysqli_query($con, view_students());
+                            while ($user = mysqli_fetch_assoc($result)) {
+                                echo "<tr>";
+                                echo "<td>" . $user['college_id'] . "</td>";
+                                echo "<td>" . $user['user_fname'] . "</td>";
+                                echo "<td>" . $user['user_lname'] . "</td>";
+                                echo "<td>" . $user['user_email'] . "</td>";
+                                echo "<td>" . $user['user_phone'] . "</td>";
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
+            </div>
 
+            <hr>
 
-                <br><br><br>
-                <!-- draw a horizontal line between the two tables -->
-                <hr width=100% align="left">
-                <br><br><br><br>
-
-                <center>
-                    <h4>  FACULTY DETAILS </h4><br>
-                </center>
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        <form>
-                            <table class="table-bordered" width="900px" style="text-align: center">
-                                <tr>
-                                    <th>COLLEGE ID</th>
-                                    <th>FIRST NAME</th>
-                                    <th>LAST NAME</th>
-                                    <th>EMAIL</th>
-                                    <th>PHONE NO.</th>
-                                </tr>
-
-                                <?php
-
-                                $result = mysqli_query($con, view_faculty());
-                                while ($user = mysqli_fetch_assoc($result)) {
-                                    ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $user['college_id']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $user['user_fname']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $user['user_lname']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $user['user_email']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $user['user_phone']; ?>
-                                        </td>
-
-                                    </tr>
-
-                                    <?php
-                                }
-                                ?>
-                            </table>
-
-
-                        </form>
-                    </div>
-                    <div class="col-md-2"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>FACULTY DETAILS</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>COLLEGE ID</th>
+                                <th>FIRST NAME</th>
+                                <th>LAST NAME</th>
+                                <th>EMAIL</th>
+                                <th>PHONE NO.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $result = mysqli_query($con, view_faculty());
+                            while ($user = mysqli_fetch_assoc($result)) {
+                                echo "<tr>";
+                                echo "<td>" . $user['college_id'] . "</td>";
+                                echo "<td>" . $user['user_fname'] . "</td>";
+                                echo "<td>" . $user['user_lname'] . "</td>";
+                                echo "<td>" . $user['user_email'] . "</td>";
+                                echo "<td>" . $user['user_phone'] . "</td>";
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
+            </div>
 
+            <hr>
 
-                <br><br><br>
-                <!-- draw a horizontal line between the two tables -->
-                <hr width=100% align="left">
-
-
-                <br><br><br><br>
-
-                <center>
-                    <h4>  LIBRARY DETAILS  </h4><br>
-                </center>
-                <br><br>
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        <form>
-                            <table class="table-bordered" width="900px" style="text-align: center">
-                                <tr>
-                                    <th>COLLEGE ID</th>
-                                    <th>FIRST NAME</th>
-                                    <th>LAST NAME</th>
-                                    <th>EMAIL</th>
-                                    <th>PHONE NO.</th>
-                                </tr>
-
-                                <?php
-
-                                $result = mysqli_query($con, view_staff());
-                                while ($user = mysqli_fetch_assoc($result)) {
-                                    ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $user['college_id']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $user['user_fname']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $user['user_lname']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $user['user_email']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $user['user_phone']; ?>
-                                        </td>
-
-                                    </tr>
-
-                                    <?php
-                                }
-                                ?>
-                            </table>
-
-
-                        </form>
-                    </div>
-                    <div class="col-md-2"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>LIBRARY STAFF DETAILS</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>COLLEGE ID</th>
+                                <th>FIRST NAME</th>
+                                <th>LAST NAME</th>
+                                <th>EMAIL</th>
+                                <th>PHONE NO.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $result = mysqli_query($con, view_staff());
+                            while ($user = mysqli_fetch_assoc($result)) {
+                                echo "<tr>";
+                                echo "<td>" . $user['college_id'] . "</td>";
+                                echo "<td>" .
+                                $user['user_fname'] . "</td>";
+                                echo "<td>" . $user['user_lname'] . "</td>";
+                                echo "<td>" . $user['user_email'] . "</td>";
+                                echo "<td>" . $user['user_phone'] . "</td>";
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
-
-
-                <br><br><br>
-                <!-- draw a horizontal line between the two tables -->
-                <hr width=100% align="left">
-
             </div>
         </div>
+    </div>
 
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    </body>
+</body>
 
 </html>

@@ -30,8 +30,8 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="adminHomepage.php">Library Management System (LMS)</a>
 			</div>
-			<font style="color: red"><span><strong>Welcome: <?php echo $user_data['user_fname'];?></strong></span></font>
-			<font style="color: red"><span><strong>Email: <?php echo $user_data['user_email'];?></strong></font>
+			<font style="color: white"><span><strong>Welcome: <?php echo $user_data['user_fname'];?></strong></span></font>
+			<font style="color: white"><span><strong>Email: <?php echo $user_data['user_email'];?></strong></font>
 		    <ul class="nav navbar-nav navbar-right">
 		      <li class="nav-item dropdown">
 	        	<a class="nav-link dropdown-toggle" data-toggle="dropdown">My Profile </a>
