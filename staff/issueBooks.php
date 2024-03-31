@@ -184,30 +184,4 @@
             }
 		}
 		
-
-
-        // $issued_id = random_num(20);
-
-        // // Sanitize user inputs to prevent SQL injection
-        // $ISBN = mysqli_real_escape_string($con, $_POST['ISBN']);
-        // $college_id = mysqli_real_escape_string($con, $_POST['college_id']);
-        // $issue_date = mysqli_real_escape_string($con, $_POST['issue_date']);
-        // $due_date = mysqli_real_escape_string($con, $_POST['due_date']);
-
-        // // Ensure due_date is in the correct format (YYYY-MM-DD) for MySQL
-        // $due_date = date('Y-m-d', strtotime($due_date));
-
-        // // Construct the SQL query with sanitized values
-        // // $query = "INSERT INTO issuedbook (issued_id, ISBN, college_id, issue_date, due_date) VALUES ('$issued_id', '$ISBN', '$college_id', '$issue_date', '$due_date')";
-
-        // $query_run = mysqli_query($con, $query);
-
-        // Check if the query was successful
-        // if ($query_run) {
-        //     header("Location: staffHomepage.php");
-        //     exit; // exit script to prevent further execution
-        // } else {
-        //     echo "Error: " . mysqli_error($con);
-        // }
-    // }
 ?>

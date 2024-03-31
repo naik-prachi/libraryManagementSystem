@@ -59,9 +59,6 @@ $user_data = check_login($con);     // to check whether the user is logged in
                 <li><a href="adminHomepage.php">Home</a></li>
                 <li><a href="addUsers.php">Add Users</a></li>
                 <li><a href="manageUsers.php">Manage Users</a></li>
-                <!-- <li><a href=".php">View Books</a></li> -->
-                <!-- <li><a href="staffViewUsers.php">View Users</a></li> -->
-                <!-- <li><a href="#">Notifications</a></li> -->
             </ul>
         </div>
 

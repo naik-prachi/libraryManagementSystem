@@ -44,33 +44,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Add Books</title>
 </head>
 <body>
-    <style type="text/css">
-
-        #text{
-            height: 25px;
-            border-radius: 5px;
-            padding: 4px;
-            border: solid thin #aaa;
-            width: 100%;
-        }
-        #button{
-            padding: 10px;
-            width: 100px;
-            color: white;
-            background-color: cadetblue;
-            border: none;
-        }
-
-        #box{
-            background-color: gray;
-            margin: auto;
-            width: 300px;
-            padding: 20px;
-        }
-    </style>
+    
 
     <div id="box">
         <form action="" method="post">
