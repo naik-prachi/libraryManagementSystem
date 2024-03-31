@@ -89,58 +89,9 @@ function view_staff()
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 
-    <!-- Custom CSS -->
-    <style>
-        /* Sidebar Styles */
-        .sidebar {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #343a40; /* Dark background color */
-            padding-top: 20px;
-            color: #fff; /* Text color */
-        }
-
-        /* Main Content Styles */
-        .content {
-            margin-left: 250px;
-            padding: 20px;
-        }
-
-        /* Card Styles */
-        .card {
-            margin-bottom: 20px;
-        }
-
-        /* Profile Picture Styles */
-        .profile-pic img {
-            border-radius: 50%;
-        }
-
-        /* Table Styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #343a40; /* Dark background color for table headers */
-            color: #fff;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2; /* Light background color for even rows */
-        }
-    </style>
+    
 </head>
 
 <body>
