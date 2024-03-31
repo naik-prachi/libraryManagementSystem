@@ -8,6 +8,7 @@
     $user_data = check_login($con);
 
     $query = "DELETE FROM users WHERE college_id = $_GET[cid]";
+    
     // Execute the DELETE query
     if (mysqli_query($con, $query)) {
         // Book successfully removed

@@ -190,11 +190,87 @@ $query = "SELECT * FROM view_student_faculty";
     return ($query);
 }
 
+// to view all books
     function view_all_books()
 {
     include ("../connection.php");
     // Query the view_student_faculty to retrieve user details
 $query = "SELECT ISBN, book_title, book_author, book_subject, available_copies FROM books";
+
+    return ($query);
+}
+
+// to get the count of all students
+
+function get_student_count()
+{
+    include ("../connection.php");
+    $student_count = 0;
+    $query = "SELECT count(*) AS student_count FROM users WHERE user_type = 'Student'";
+    $result = mysqli_query($con, $query);
+    while ($user = mysqli_fetch_assoc($result)) {
+        $student_count = $user['student_count'];
+    }
+    return ($student_count);
+}
+
+// to get count of all faculties
+function get_faculty_count()
+{
+    include ("../connection.php");
+    $faculty_count = 0;
+    $query = "SELECT count(*) AS faculty_counts 
+            FROM users
+            WHERE user_type = 'Faculty'";
+    $result = mysqli_query($con, $query);
+    while ($user = mysqli_fetch_assoc($result)) {
+        $faculty_count = $user['faculty_counts'];
+    }
+    return ($faculty_count);
+}
+
+// to get count of all staffs
+function get_staff_count()
+{
+    include ("../connection.php");
+    $staff_count = 0;
+    $query = "SELECT count(*) as staff_count from users where user_type = 'Staff'";
+    $result = mysqli_query($con, $query);
+    while ($user = mysqli_fetch_assoc($result)) {
+        $staff_count = $user['staff_count'];
+    }
+    return ($staff_count);
+}
+
+// to view students due to return book today
+function view_students()
+{
+    include ("../connection.php");
+
+    // join table books and issuedbook
+    $query = "SELECT * FROM users WHERE user_type = 'Student'";
+
+    return ($query);
+}
+
+// to view all faculties
+function view_faculty()
+{
+    include ("../connection.php");
+
+    // join table books and issuedbook
+    $query = "SELECT * FROM users WHERE user_type = 'Faculty'";
+
+    return ($query);
+}
+
+// to view all staffs
+function view_staff()
+{
+    include ("../connection.php");
+
+    // join table books and issuedbook
+    $query = "SELECT * FROM users WHERE user_type = 'Staff'";
 
     return ($query);
 }

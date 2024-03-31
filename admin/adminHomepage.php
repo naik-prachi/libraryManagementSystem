@@ -8,75 +8,6 @@ include ("../functions.php");   //calling the functions
 
 $user_data = check_login($con);     // to check whether the user is logged in
 
-// get count of borrowed copies
-function get_student_count()
-{
-    include ("../connection.php");
-    $student_count = 0;
-    $query = "SELECT count(*) AS student_count FROM users WHERE user_type = 'Student'";
-    $result = mysqli_query($con, $query);
-    while ($user = mysqli_fetch_assoc($result)) {
-        $student_count = $user['student_count'];
-    }
-    return ($student_count);
-}
-
-function get_faculty_count()
-{
-    include ("../connection.php");
-    $faculty_count = 0;
-    $query = "SELECT count(*) AS faculty_counts 
-            FROM users
-            WHERE user_type = 'Faculty'";
-    $result = mysqli_query($con, $query);
-    while ($user = mysqli_fetch_assoc($result)) {
-        $faculty_count = $user['faculty_counts'];
-    }
-    return ($faculty_count);
-}
-
-function get_staff_count()
-{
-    include ("../connection.php");
-    $staff_count = 0;
-    $query = "SELECT count(*) as staff_count from users where user_type = 'Staff'";
-    $result = mysqli_query($con, $query);
-    while ($user = mysqli_fetch_assoc($result)) {
-        $staff_count = $user['staff_count'];
-    }
-    return ($staff_count);
-}
-
-// view of students due to return book today
-function view_students()
-{
-    include ("../connection.php");
-
-    // join table books and issuedbook
-    $query = "SELECT * FROM users WHERE user_type = 'Student'";
-
-    return ($query);
-}
-
-function view_faculty()
-{
-    include ("../connection.php");
-
-    // join table books and issuedbook
-    $query = "SELECT * FROM users WHERE user_type = 'Faculty'";
-
-    return ($query);
-}
-
-function view_staff()
-{
-    include ("../connection.php");
-
-    // join table books and issuedbook
-    $query = "SELECT * FROM users WHERE user_type = 'Staff'";
-
-    return ($query);
-}
 ?>
 
 <!DOCTYPE html>
@@ -89,58 +20,9 @@ function view_staff()
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 
-    <!-- Custom CSS -->
-    <style>
-        /* Sidebar Styles */
-        .sidebar {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #343a40; /* Dark background color */
-            padding-top: 20px;
-            color: #fff; /* Text color */
-        }
-
-        /* Main Content Styles */
-        .content {
-            margin-left: 250px;
-            padding: 20px;
-        }
-
-        /* Card Styles */
-        .card {
-            margin-bottom: 20px;
-        }
-
-        /* Profile Picture Styles */
-        .profile-pic img {
-            border-radius: 50%;
-        }
-
-        /* Table Styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #343a40; /* Dark background color for table headers */
-            color: #fff;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2; /* Light background color for even rows */
-        }
-    </style>
+    
 </head>
 
 <body>
