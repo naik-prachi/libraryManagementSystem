@@ -30,6 +30,10 @@
     border-radius: 50%;
 }
 
+.sidebar a:hover {
+    background-color: #495057; /* Darker background color on hover */
+}
+
 /* Table Styles */
 table {
     width: 100%;
@@ -124,4 +128,17 @@ h1 {
     margin: auto;
     width: 300px;
     padding: 20px;
+}
+
+/* Custom CSS to shrink the table */
+table {
+    width: 80%; /* Adjust the width as needed */
+    margin: auto; /* Center the table */
+}
+
+th, td {
+    max-width: 150px; /* Adjust the maximum width of table cells */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Truncate text if it overflows */
+    white-space: nowrap; /* Prevent text from wrapping */
 }

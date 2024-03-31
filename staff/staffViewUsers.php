@@ -10,15 +10,7 @@ $user_data = check_login($con);     // to check whether the user is logged in
 
 
 
-// view of students due to return book today
-function view_student_faculty()
-{
-    include ("../connection.php");
-    // Query the view_student_faculty to retrieve user details
-$query = "SELECT * FROM view_student_faculty";
 
-    return ($query);
-}
 ?>
 
 <!DOCTYPE html>
