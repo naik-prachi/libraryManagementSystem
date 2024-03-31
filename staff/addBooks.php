@@ -4,6 +4,7 @@
     include("../connection.php");  //connecting to the database
     include("../functions.php");   //calling the functions
     include("../navbar.php");
+    
 
     // check if the user has clicked on the post button
     if($_SERVER['REQUEST_METHOD'] == "POST"){
