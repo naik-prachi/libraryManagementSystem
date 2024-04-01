@@ -1,63 +1,63 @@
 <?php
-    session_start();
+session_start();
 
-    // Include necessary files (e.g., connection and functions)
-    include ("../connection.php");
-    include ("../functions.php");
+// Include necessary files (e.g., connection and functions)
+include ("../connection.php");
+include ("../functions.php");
 
-    // Initialise variable to track if email exists
-    $user_data = check_login($con);
+// Initialise variable to track if email exists
+$user_data = check_login($con);
 
-    $query = "SELECT * FROM users WHERE college_id = $_GET[cid]";
-	$result = mysqli_query($con,$query);
-	// Retrieve existing user details from the database
-    $user = mysqli_fetch_assoc($result);
+$query = "SELECT * FROM users WHERE college_id = $_GET[cid]";
+$result = mysqli_query($con, $query);
+// Retrieve existing user details from the database
+$user = mysqli_fetch_assoc($result);
 
-    // Check if the user has clicked on the post button
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        // Something was posted, collect the data from post variable
-        if (isset ($_POST['update'])) {
+// Check if the user has clicked on the post button
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    // Something was posted, collect the data from post variable
+    if (isset($_POST['update'])) {
 
-            // Query the database to check if the email exists
-            $query = "SELECT * FROM users WHERE college_id = $_GET[cid]";
-            $result = mysqli_query($con, $query);
+        // Query the database to check if the email exists
+        $query = "SELECT * FROM users WHERE college_id = $_GET[cid]";
+        $result = mysqli_query($con, $query);
 
-            if (mysqli_num_rows($result) > 0) {
+        if (mysqli_num_rows($result) > 0) {
 
-                // Retrieve existing user details from the database
-                $user = mysqli_fetch_assoc($result);
+            // Retrieve existing user details from the database
+            $book = mysqli_fetch_assoc($result);
 
-                // Handle the second POST request for updating user details
-                if (isset ($_POST['update'])) {
-                    $new_user_fname = $_POST['new_user_fname'];
-                    $new_user_lname = $_POST['new_user_lname'];
-                    $new_user_email = $_POST['new_user_email'];
-                    $new_user_phone = $_POST['new_user_phone'];
+            // Handle the second POST request for updating user details
+            if (isset($_POST['update'])) {
+                $new_user_fname = $_POST['new_user_fname'];
+                $new_user_lname = $_POST['new_user_lname'];
+                $new_user_email = $_POST['new_user_email'];
+                $new_user_phone = $_POST['new_user_phone'];
 
-                    // Update user details in the database
-                    $query = "UPDATE users SET user_fname = '$new_user_fname', user_lname = '$new_user_lname', user_email = '$new_user_email', user_phone = '$new_user_phone' WHERE college_id = $_GET[cid]";
-                    $result = mysqli_query($con, $query);
+                // Update user details in the database
+                $query = "UPDATE users SET user_fname = '$new_user_fname', user_lname = '$new_user_lname', user_email = '$new_user_email', user_phone = '$new_user_phone' WHERE college_id = $_GET[cid]";
+                $result = mysqli_query($con, $query);
 
-                    if ($result) {
-                        // User details updated successfully
+                if ($result) {
+                    // User details updated successfully
 
-                        // Display the alert box  
-                        echo '<script>alert("User update is successful!")</script>';
+                    // Display the alert box  
+                    echo '<script>alert("User update is successful!")</script>';
 
-                        // Redirect after a short delay
-                        echo '<script>window.setTimeout(function(){ window.location.href = "adminHomepage.php"; }, 400);</script>';
-                        exit; // Terminate script execution
-                    } else {
-                        // Error occurred while updating user details
-                        // Display an error message or handle the error accordingly
-                        echo "Error updating user details: " . mysqli_error($con);
-                    }
+                    // Redirect after a short delay
+                    echo '<script>window.setTimeout(function(){ window.location.href = "adminHomepage.php"; }, 400);</script>';
+                    exit; // Terminate script execution
+                } else {
+                    // Error occurred while updating user details
+                    // Display an error message or handle the error accordingly
+                    echo "Error updating user details: " . mysqli_error($con);
                 }
             }
         }
-
-
     }
+
+
+}
 ?>
 
 

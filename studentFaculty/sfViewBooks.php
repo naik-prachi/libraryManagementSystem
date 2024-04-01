@@ -19,7 +19,7 @@ $user_data = check_login($con);     // to check whether the user is logged in
     <title>My Website</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    
+
 </head>
 
 <body>
@@ -67,7 +67,7 @@ $user_data = check_login($con);     // to check whether the user is logged in
 
     <div class="content">
 
-        
+
 
         <center>
             <h4 style="margin: 25px">Details of all students and faculties</h4><br>
@@ -89,24 +89,24 @@ $user_data = check_login($con);     // to check whether the user is logged in
                         <?php
 
                         $result = mysqli_query($con, view_all_books());
-                        while ($user = mysqli_fetch_assoc($result)) {
+                        while ($book = mysqli_fetch_assoc($result)) {
                             ?>
                             <tr>
-                                
+
                                 <td>
-                                    <?php echo $user['ISBN']; ?>
+                                    <?php echo $book['ISBN']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['book_title']; ?>
+                                    <?php echo $book['book_title']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['book_author']; ?>
+                                    <?php echo $book['book_author']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['book_subject']; ?>
+                                    <?php echo $book['book_subject']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['available_copies']; ?>
+                                    <?php echo $book['available_copies']; ?>
                                 </td>
                             </tr>
 
@@ -120,8 +120,8 @@ $user_data = check_login($con);     // to check whether the user is logged in
             </div>
             <div class="col-md-2"></div>
         </div>
-            <div class="col-md-2"></div>
-        </div>
+        <div class="col-md-2"></div>
+    </div>
 
     </div>
 

@@ -1,10 +1,11 @@
 <?php
-	session_start();
+session_start();
 
-	include ("../connection.php");
-	include ("../functions.php");
+include ("../connection.php");
+include ("../functions.php");
+include ("../navbar.php");
 
-	$user_data = check_login($con);
+$user_data = check_login($con);
 
 ?>
 
@@ -17,61 +18,13 @@
 	<link rel="stylesheet" type="text/css" href="../bootstrap-4.4.1/css/bootstrap.min.css">
 	<script type="text/javascript" src="../bootstrap-4.4.1/js/juqery_latest.js"></script>
 	<script type="text/javascript" src="../bootstrap-4.4.1/js/bootstrap.min.js"></script>
-	
+
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="staffHomepage.php">Library Management System (LMS)</a>
-			</div>
-			<font style="color: white"><span><strong>Welcome:
-						<?php echo $user_data['user_fname']; ?>
-					</strong></span></font>
-			<font style="color: white"><span><strong>Email:
-						<?php echo $user_data['user_email']; ?>
-					</strong></font>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown">My Profile </a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="">View Profile</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Edit Profile</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="change_password.php">Change Password</a>
-					</div>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="../logout.php">Logout</a>
-				</li>
-			</ul>
-		</div>
-	</nav><br>
-	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd">
-		<div class="container-fluid">
+	<!-- TODO: add the sidebar -->
 
-			<ul class="nav navbar-nav navbar-center">
-				<li class="nav-item">
-					<a class="nav-link" href="staffHomepage.php">Dashboard</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown">Books </a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="addBooks.php">Add New Book</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="manageBook.php">Manage Books</a>
-					</div>
-				</li>
-
-
-				<li class="nav-item">
-					<a class="nav-link" href="issueBook.php">Issue Book</a>
-				</li>
-			</ul>
-		</div>
-	</nav><br>
+	<br>
 	<br><br>
 	<center>
 		<h4>Issue Book</h4><br>
@@ -89,10 +42,10 @@
 						<?php
 						$query = "SELECT ISBN FROM books";
 						$result = mysqli_query($con, $query);
-						while ($user = mysqli_fetch_assoc($result)) {
+						while ($book = mysqli_fetch_assoc($result)) {
 							?>
 							<option>
-								<?php echo $user['ISBN']; ?>
+								<?php echo $book['ISBN']; ?>
 							</option>
 							<?php
 						}
@@ -108,10 +61,10 @@
 						<?php
 						$query = "SELECT college_id FROM users WHERE user_type = 'Student' OR user_type = 'Faculty'";
 						$result = mysqli_query($con, $query);
-						while ($user = mysqli_fetch_assoc($result)) {
+						while ($book = mysqli_fetch_assoc($result)) {
 							?>
 							<option>
-								<?php echo $user['college_id']; ?>
+								<?php echo $book['college_id']; ?>
 							</option>
 							<?php
 						}
@@ -148,40 +101,40 @@
 </html>
 
 <?php
-	if (isset($_POST['issue_book'])) {
-        include("../connection.php");
+if (isset($_POST['issue_book'])) {
+	include ("../connection.php");
 
-		// Prepare and bind parameters
-		$stmt = $con->prepare("CALL IssueBook(?, ?, ?, ?, ?)");
-		$stmt->bind_param("issss", $issued_id, $ISBN, $college_id, $issue_date, $due_date);
+	// Prepare and bind parameters
+	$stmt = $con->prepare("CALL IssueBook(?, ?, ?, ?, ?)");
+	$stmt->bind_param("issss", $issued_id, $ISBN, $college_id, $issue_date, $due_date);
 
-		// Set parameters and execute
-		$issued_id = random_num(20);
+	// Set parameters and execute
+	$issued_id = random_num(20);
 
-        // Sanitize user inputs to prevent SQL injection
-        $ISBN = mysqli_real_escape_string($con, $_POST['ISBN']);
-        $college_id = mysqli_real_escape_string($con, $_POST['college_id']);
-        $issue_date = mysqli_real_escape_string($con, $_POST['issue_date']);
-        $due_date = mysqli_real_escape_string($con, $_POST['due_date']);
+	// Sanitize user inputs to prevent SQL injection
+	$ISBN = mysqli_real_escape_string($con, $_POST['ISBN']);
+	$college_id = mysqli_real_escape_string($con, $_POST['college_id']);
+	$issue_date = mysqli_real_escape_string($con, $_POST['issue_date']);
+	$due_date = mysqli_real_escape_string($con, $_POST['due_date']);
 
-        // Ensure due_date is in the correct format (YYYY-MM-DD) for MySQL
-        $due_date = date('Y-m-d', strtotime($due_date));
-		$stmt->execute();
+	// Ensure due_date is in the correct format (YYYY-MM-DD) for MySQL
+	$due_date = date('Y-m-d', strtotime($due_date));
+	$stmt->execute();
 
-		
-		$result = mysqli_query($con, $query);
 
-            if ($result) {
-                // Display success message and redirect
-                echo '<script>alert("Book issue is successful!")</script>';
-                echo '<script>window.setTimeout(function(){ window.location.href = "issueBooks.php"; }, 400);</script>';
-				// Close statement
+	$result = mysqli_query($con, $query);
+
+	if ($result) {
+		// Display success message and redirect
+		echo '<script>alert("Book issue is successful!")</script>';
+		echo '<script>window.setTimeout(function(){ window.location.href = "issueBooks.php"; }, 400);</script>';
+		// Close statement
 		$stmt->close();
-                die;
+		die;
 
-            } else {
-                echo "Error: " . mysqli_error($con);
-            }
-		}
-		
+	} else {
+		echo "Error: " . mysqli_error($con);
+	}
+}
+
 ?>

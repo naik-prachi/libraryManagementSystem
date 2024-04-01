@@ -190,26 +190,26 @@ $user_data = check_login($con);     // to check whether the user is logged in
                         <?php
 
                         $result = mysqli_query($con, view_students_past_due());
-                        while ($user = mysqli_fetch_assoc($result)) {
+                        while ($book = mysqli_fetch_assoc($result)) {
                             ?>
                             <tr>
                                 <td>
-                                    <?php echo $user['ISBN']; ?>
+                                    <?php echo $book['ISBN']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['book_title']; ?>
+                                    <?php echo $book['book_title']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['college_id']; ?>
+                                    <?php echo $book['college_id']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['user_fname'], " ", $user['user_lname']; ?>
+                                    <?php echo $book['user_fname'], " ", $book['user_lname']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['user_email']; ?>
+                                    <?php echo $book['user_email']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['due_date']; ?>
+                                    <?php echo $book['due_date']; ?>
                                 </td>
 
                             </tr>
@@ -252,26 +252,26 @@ $user_data = check_login($con);     // to check whether the user is logged in
                         <?php
 
                         $result = mysqli_query($con, view_students_due_today());
-                        while ($user = mysqli_fetch_assoc($result)) {
+                        while ($book = mysqli_fetch_assoc($result)) {
                             ?>
                             <tr>
                                 <td>
-                                    <?php echo $user['ISBN']; ?>
+                                    <?php echo $book['ISBN']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['book_title']; ?>
+                                    <?php echo $book['book_title']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['college_id']; ?>
+                                    <?php echo $book['college_id']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['user_fname'], " ", $user['user_lname']; ?>
+                                    <?php echo $book['user_fname'], " ", $book['user_lname']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['user_email']; ?>
+                                    <?php echo $book['user_email']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['issue_date']; ?>
+                                    <?php echo $book['issue_date']; ?>
                                 </td>
 
                             </tr>
@@ -316,29 +316,29 @@ $user_data = check_login($con);     // to check whether the user is logged in
                         <?php
 
                         $result = mysqli_query($con, view_issued_book());
-                        while ($user = mysqli_fetch_assoc($result)) {
+                        while ($book = mysqli_fetch_assoc($result)) {
                             ?>
                             <tr>
                                 <td>
-                                    <?php echo $user['ISBN']; ?>
+                                    <?php echo $book['ISBN']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['book_title']; ?>
+                                    <?php echo $book['book_title']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['college_id']; ?>
+                                    <?php echo $book['college_id']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['user_fname'], " ", $user['user_lname']; ?>
+                                    <?php echo $book['user_fname'], " ", $book['user_lname']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['user_email']; ?>
+                                    <?php echo $book['user_email']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['issue_date']; ?>
+                                    <?php echo $book['issue_date']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['due_date']; ?>
+                                    <?php echo $book['due_date']; ?>
                                 </td>
 
                             </tr>

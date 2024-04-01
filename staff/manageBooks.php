@@ -44,10 +44,10 @@ $user_data = check_login($con);
                     </ul>
                 </div>
             </div>
-            <div >
-                <div ">
-                    <h4 class=" text-center">Manage Books</h4>
-                    <table style="margin-left:300px">
+            <div>
+                <div>
+                    <h4 class=" text-center" style="margin: 30px">Manage Books</h4>
+                    <table style="margin-left:270px">
                         <thead class="thead-dark">
                             <tr>
                                 <th>ISBN No.</th>
@@ -88,12 +88,13 @@ $user_data = check_login($con);
                                     <td>
                                         <?php echo $book['borrowed_copies']; ?>
                                     </td>
-                                    <td>
-                                        <a class="btn btn-sm btn-primary"
-                                            href="updateBooks.php?bn=<?php echo $book['ISBN']; ?>">Update</a>
-                                        <a class="btn btn-sm btn-danger"
-                                            href="removeBook.php?bn=<?php echo $book['ISBN']; ?>">Delete</a>
+
+                                    <td><button class="btn " name=""><a class="btn-sm btn-primary"
+                                                href="updateBooks.php?bn=<?php echo $book['ISBN']; ?>">Update</a></button>
+                                        <br><button class="btn"><a class=" btn-sm btn-danger"
+                                                href="removeBook.php?bn=<?php echo $book['ISBN']; ?>">Delete</a></button>
                                     </td>
+
                                 </tr>
                             <?php } ?>
                         </tbody>

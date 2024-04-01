@@ -1,45 +1,47 @@
 <?php
-    session_start();
+session_start();
 
-    include("connection.php");  //connecting to the database
-    include("functions.php");   //calling the functions
+include ("connection.php");  //connecting to the database
+include ("functions.php");   //calling the functions
 
-    $query = "select * from users where user_type = '$user_type'";
-    $result = mysqli_query($con, $query);
+$query = "select * from users where user_type = '$user_type'";
+$result = mysqli_query($con, $query);
 
-    // Check if query executed successfully
-    if ($result) {
-        // Display user details in a table
-        echo "<table border='1'>";
-        echo "<tr><th>User ID</th><th>User Type</th><th>User Name</th><th>User Email</th></tr>";
-        while ($user = mysqli_fetch_assoc($result)) {
-            echo "<tr>";
-            echo "<td>" . $user['user_id'] . "</td>";
-            echo "<td>" . $user['user_type'] . "</td>";
-            echo "<td>" . $user['college_id'] . "</td>";
-            echo "<td>" . $user['user_fname'] . "</td>";
-            echo "<td>" . $user['user_lname'] . "</td>";
-            echo "<td>" . $user['user_email'] . "</td>";
-            echo "<td>" . $user['user_phone'] . "</td>";
-            echo "</tr>";
-        }
-        echo "</table>";
-    } else {
-        // Display an error message if query fails
-        echo "Error: " . mysqli_error($con);
+// Check if query executed successfully
+if ($result) {
+    // Display user details in a table
+    echo "<table border='1'>";
+    echo "<tr><th>User ID</th><th>User Type</th><th>User Name</th><th>User Email</th></tr>";
+    while ($book = mysqli_fetch_assoc($result)) {
+        echo "<tr>";
+        echo "<td>" . $book['user_id'] . "</td>";
+        echo "<td>" . $book['user_type'] . "</td>";
+        echo "<td>" . $book['college_id'] . "</td>";
+        echo "<td>" . $book['user_fname'] . "</td>";
+        echo "<td>" . $book['user_lname'] . "</td>";
+        echo "<td>" . $book['user_email'] . "</td>";
+        echo "<td>" . $book['user_phone'] . "</td>";
+        echo "</tr>";
     }
+    echo "</table>";
+} else {
+    // Display an error message if query fails
+    echo "Error: " . mysqli_error($con);
+}
 
-    // Display the alert box  
-    // echo '<script>alert("Registration is successful!")</script>'; 
+// Display the alert box  
+// echo '<script>alert("Registration is successful!")</script>'; 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View users</title>
 </head>
+
 <body>
     <!-- usertype dropdown menu-->
     <select id="userType" name="user_type">
@@ -55,11 +57,11 @@
 
     <!-- JavaScript to handle dropdown change -->
     <script>
-        document.getElementById("userType").addEventListener("change", function() {
+        document.getElementById("userType").addEventListener("change", function () {
             var userType = this.value;
             // Send AJAX request to retrieve user details
             var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
+            xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("userDetails").innerHTML = this.responseText;
                 }
@@ -69,5 +71,5 @@
         });
     </script>
 </body>
-</html>
 
+</html>

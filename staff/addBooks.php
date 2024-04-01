@@ -52,6 +52,7 @@
 </head>
 <body>
     
+    <!-- TODO: add the sidebar -->
 
     <div id="box">
         <form action="" method="post">
@@ -70,7 +71,7 @@
 
             <input id="button" type="submit" class="btn btn-primary" value="Add"><br><br>
 
-            <a href="">Update Book</a>
+            
         </form>
     </div>
 </body>

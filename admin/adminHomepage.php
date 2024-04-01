@@ -22,11 +22,11 @@ $user_data = check_login($con);     // to check whether the user is logged in
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 
-    
+
 </head>
 
 <body>
-    
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
@@ -58,7 +58,9 @@ $user_data = check_login($con);     // to check whether the user is logged in
         <div class="profile-pic text-center">
             <img src="../images/dummypic.png" alt="dummy profile" height="150px" width="150px">
             <br><br>
-            <h5>Hello, <?php echo $user_data['user_fname'], " ", $user_data['user_lname']; ?></h5>
+            <h5>Hello,
+                <?php echo $user_data['user_fname'], " ", $user_data['user_lname']; ?>
+            </h5>
         </div>
 
         <br><br><br>
@@ -87,7 +89,9 @@ $user_data = check_login($con);     // to check whether the user is logged in
                     <div class="card bg-light">
                         <div class="card-header">STUDENTS</div>
                         <div class="card-body">
-                            <p class="card-text">No. of students: <?php echo get_student_count(); ?></p>
+                            <p class="card-text">No. of students:
+                                <?php echo get_student_count(); ?>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -96,7 +100,9 @@ $user_data = check_login($con);     // to check whether the user is logged in
                     <div class="card bg-light">
                         <div class="card-header">FACULTY</div>
                         <div class="card-body">
-                            <p class="card-text">No. of faculties: <?php echo get_faculty_count(); ?></p>
+                            <p class="card-text">No. of faculties:
+                                <?php echo get_faculty_count(); ?>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -105,7 +111,9 @@ $user_data = check_login($con);     // to check whether the user is logged in
                     <div class="card bg-light">
                         <div class="card-header">LIBRARY STAFF</div>
                         <div class="card-body">
-                            <p class="card-text">No. of staff: <?php echo get_staff_count(); ?></p>
+                            <p class="card-text">No. of staff:
+                                <?php echo get_staff_count(); ?>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -129,13 +137,13 @@ $user_data = check_login($con);     // to check whether the user is logged in
                         <tbody>
                             <?php
                             $result = mysqli_query($con, view_students());
-                            while ($user = mysqli_fetch_assoc($result)) {
+                            while ($book = mysqli_fetch_assoc($result)) {
                                 echo "<tr>";
-                                echo "<td>" . $user['college_id'] . "</td>";
-                                echo "<td>" . $user['user_fname'] . "</td>";
-                                echo "<td>" . $user['user_lname'] . "</td>";
-                                echo "<td>" . $user['user_email'] . "</td>";
-                                echo "<td>" . $user['user_phone'] . "</td>";
+                                echo "<td>" . $book['college_id'] . "</td>";
+                                echo "<td>" . $book['user_fname'] . "</td>";
+                                echo "<td>" . $book['user_lname'] . "</td>";
+                                echo "<td>" . $book['user_email'] . "</td>";
+                                echo "<td>" . $book['user_phone'] . "</td>";
                                 echo "</tr>";
                             }
                             ?>
@@ -162,13 +170,13 @@ $user_data = check_login($con);     // to check whether the user is logged in
                         <tbody>
                             <?php
                             $result = mysqli_query($con, view_faculty());
-                            while ($user = mysqli_fetch_assoc($result)) {
+                            while ($book = mysqli_fetch_assoc($result)) {
                                 echo "<tr>";
-                                echo "<td>" . $user['college_id'] . "</td>";
-                                echo "<td>" . $user['user_fname'] . "</td>";
-                                echo "<td>" . $user['user_lname'] . "</td>";
-                                echo "<td>" . $user['user_email'] . "</td>";
-                                echo "<td>" . $user['user_phone'] . "</td>";
+                                echo "<td>" . $book['college_id'] . "</td>";
+                                echo "<td>" . $book['user_fname'] . "</td>";
+                                echo "<td>" . $book['user_lname'] . "</td>";
+                                echo "<td>" . $book['user_email'] . "</td>";
+                                echo "<td>" . $book['user_phone'] . "</td>";
                                 echo "</tr>";
                             }
                             ?>
@@ -195,14 +203,14 @@ $user_data = check_login($con);     // to check whether the user is logged in
                         <tbody>
                             <?php
                             $result = mysqli_query($con, view_staff());
-                            while ($user = mysqli_fetch_assoc($result)) {
+                            while ($book = mysqli_fetch_assoc($result)) {
                                 echo "<tr>";
-                                echo "<td>" . $user['college_id'] . "</td>";
+                                echo "<td>" . $book['college_id'] . "</td>";
                                 echo "<td>" .
-                                $user['user_fname'] . "</td>";
-                                echo "<td>" . $user['user_lname'] . "</td>";
-                                echo "<td>" . $user['user_email'] . "</td>";
-                                echo "<td>" . $user['user_phone'] . "</td>";
+                                    $book['user_fname'] . "</td>";
+                                echo "<td>" . $book['user_lname'] . "</td>";
+                                echo "<td>" . $book['user_email'] . "</td>";
+                                echo "<td>" . $book['user_phone'] . "</td>";
                                 echo "</tr>";
                             }
                             ?>

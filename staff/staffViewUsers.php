@@ -125,7 +125,7 @@ $user_data = check_login($con);     // to check whether the user is logged in
 
     <div class="content">
 
-        
+
 
         <center>
             <h4 style="margin: 25px">Details of all students and faculties</h4><br>
@@ -148,27 +148,27 @@ $user_data = check_login($con);     // to check whether the user is logged in
                         <?php
 
                         $result = mysqli_query($con, view_student_faculty());
-                        while ($user = mysqli_fetch_assoc($result)) {
+                        while ($book = mysqli_fetch_assoc($result)) {
                             ?>
                             <tr>
-                                
+
                                 <td>
-                                    <?php echo $user['college_id']; ?>
+                                    <?php echo $book['college_id']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['user_type']; ?>
+                                    <?php echo $book['user_type']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['user_fname'], " ", $user['user_lname']; ?>
+                                    <?php echo $book['user_fname'], " ", $book['user_lname']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['user_email']; ?>
+                                    <?php echo $book['user_email']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['user_phone']; ?>
+                                    <?php echo $book['user_phone']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $user['borrowed_books_count']; ?>
+                                    <?php echo $book['borrowed_books_count']; ?>
                                 </td>
                             </tr>
 
@@ -182,8 +182,8 @@ $user_data = check_login($con);     // to check whether the user is logged in
             </div>
             <div class="col-md-2"></div>
         </div>
-            <div class="col-md-2"></div>
-        </div>
+        <div class="col-md-2"></div>
+    </div>
 
     </div>
 

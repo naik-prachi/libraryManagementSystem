@@ -91,10 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <?php
                         $query = "SELECT DISTINCT college_id FROM users WHERE user_type = 'Student' OR user_type = 'Faculty'";
                         $result = mysqli_query($con, $query);
-                        while ($user = mysqli_fetch_assoc($result)) {
+                        while ($book = mysqli_fetch_assoc($result)) {
                             ?>
                             <option>
-                                <?php echo $user['college_id']; ?>
+                                <?php echo $book['college_id']; ?>
                             </option>
                             <?php
                         }
@@ -110,10 +110,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <?php
                         $query = "SELECT DISTINCT ISBN FROM issuedbook";
                         $result = mysqli_query($con, $query);
-                        while ($user = mysqli_fetch_assoc($result)) {
+                        while ($book = mysqli_fetch_assoc($result)) {
                             ?>
                             <option>
-                                <?php echo $user['ISBN']; ?>
+                                <?php echo $book['ISBN']; ?>
                             </option>
                             <?php
                         }
@@ -133,30 +133,30 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </html>
 
 <?php
-    if (isset($_POST['issue_book'])) {
-        include ("../connection.php");
-        $issued_id = random_num(20);
+if (isset($_POST['issue_book'])) {
+    include ("../connection.php");
+    $issued_id = random_num(20);
 
-        // Sanitize user inputs to prevent SQL injection
-        $ISBN = mysqli_real_escape_string($con, $_POST['ISBN']);
-        $college_id = mysqli_real_escape_string($con, $_POST['college_id']);
-        $issue_date = mysqli_real_escape_string($con, $_POST['issue_date']);
-        $due_date = mysqli_real_escape_string($con, $_POST['due_date']);
+    // Sanitize user inputs to prevent SQL injection
+    $ISBN = mysqli_real_escape_string($con, $_POST['ISBN']);
+    $college_id = mysqli_real_escape_string($con, $_POST['college_id']);
+    $issue_date = mysqli_real_escape_string($con, $_POST['issue_date']);
+    $due_date = mysqli_real_escape_string($con, $_POST['due_date']);
 
-        // Ensure due_date is in the correct format (YYYY-MM-DD) for MySQL
-        $due_date = date('Y-m-d', strtotime($due_date));
+    // Ensure due_date is in the correct format (YYYY-MM-DD) for MySQL
+    $due_date = date('Y-m-d', strtotime($due_date));
 
-        // Construct the SQL query with sanitized values
-        $query = "INSERT INTO issuedbook (issued_id, ISBN, college_id, issue_date, due_date) VALUES ('$issued_id', '$ISBN', '$college_id', '$issue_date', '$due_date')";
+    // Construct the SQL query with sanitized values
+    $query = "INSERT INTO issuedbook (issued_id, ISBN, college_id, issue_date, due_date) VALUES ('$issued_id', '$ISBN', '$college_id', '$issue_date', '$due_date')";
 
-        $result = mysqli_query($con, $query);
+    $result = mysqli_query($con, $query);
 
-        // Check if the query was successful
-        if ($result) {
-            header("Location: staffHomepage.php");
-            exit; // exit script to prevent further execution
-        } else {
-            echo "Error: " . mysqli_error($con);
-        }
+    // Check if the query was successful
+    if ($result) {
+        header("Location: staffHomepage.php");
+        exit; // exit script to prevent further execution
+    } else {
+        echo "Error: " . mysqli_error($con);
     }
+}
 ?>
