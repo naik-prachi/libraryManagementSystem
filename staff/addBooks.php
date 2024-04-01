@@ -49,8 +49,33 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <title>Add Books</title>
+    <style>
+        #box {
+            margin-top: 50px; /* Adjust the value as needed */
+        }
+    </style>
 </head>
 <body>
+<div class="container-fluid">
+        <div class="row">
+            <div class="sidebar bg-dark"> <!-- Apply bg-dark class here -->
+                <div class="side-bar-margin" style="margin: 40px">
+                    <div class="profile-pic">
+                        <img src="../images/dummypic.png" alt="dummy profile" height="150px" width="150px">
+                    </div>
+                    <br><br><br>
+                    <ul>
+                        <li><a href="staffHomepage.php">Home</a></li>
+                        <li><a href="issueBooks.php">Issue Books</a></li>
+                        <li><a href="returnBooks.php">Return Books</a></li>
+                        
+                        <li><a href="staffViewUsers.php">View Users</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
     
     <!-- TODO: add the sidebar -->
 

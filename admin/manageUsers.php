@@ -4,6 +4,7 @@ session_start();
 
 include ("../connection.php");
 require ("../functions.php");
+include("../navbar.php");
 
 $user_data = check_login($con);
 
@@ -14,7 +15,7 @@ $user_data = check_login($con);
 <html>
 
 <head>
-	<title>Manage Book</title>
+	<title>Manage Users</title>
 	<meta charset="utf-8" name="viewport" content="width=device-width,intial-scale=1">
 	<link rel="stylesheet" type="text/css" href="../bootstrap-4.4.1/css/bootstrap.min.css">
 	<script type="text/javascript" src="../bootstrap-4.4.1/js/juqery_latest.js"></script>
