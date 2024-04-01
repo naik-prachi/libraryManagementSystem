@@ -4,6 +4,7 @@ session_start();
 include ("../connection.php");  //connecting to the database
 include ("../functions.php");   //calling the functions
 
+
 // Function to send email
 // function sendEmail($to, $subject, $message) {
 //     $admin_email = "library@college.in";
@@ -60,12 +61,30 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Sign Up</title>
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="adminHomepage.php">Library Management System (LMS)</a>
+			</div>
+
+		    <ul class="nav navbar-nav navbar-right">
+
+		      <li class="nav-item">
+		        <a class="nav-link" href="../logout.php">Logout</a>
+		      </li>
+			  <li><a class="nav-link" href="adminHomepage.php">Home</a></li>
+		    </ul>
+		</div>
+	</nav><br>
+
     <style type="text/css">
         #text {
             height: 25px;
@@ -88,6 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             margin: auto;
             width: 300px;
             padding: 20px;
+            margin-top: 50px; 
         }
     </style>
 
