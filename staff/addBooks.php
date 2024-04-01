@@ -93,7 +93,7 @@
             <input id="text" type="text" name="available_copies" placeholder="Currently available copied"><br><br>
             
 
-            <input id="button" type="submit" value="Add"><br><br>
+            <input id="button" type="submit" class="btn btn-primary" value="Add"><br><br>
 
             <a href="">Update Book</a>
         </form>
